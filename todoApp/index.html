@@ -12,13 +12,16 @@
     </head>
 
     <body>
-        <div class="container">
+        <div class="container" ng-controller="MainCtrl as main">
             <div class="row">
                 <h1>Todo app</h1>
+                <pre>{{main.data}}</pre>
             </div>
         </div>
 
         <script src="./app.js"></script>
+        <script src="./main.ctrl.js"></script>
+        <script src="./data-provider/dataProvider.service.js"></script>
     </body>
 
 </html>
