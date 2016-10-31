@@ -3,7 +3,7 @@
   angular
     .module('todoApp')
     .component('todoList', {
-      template: '<todo-list-row ng-repeat="item in vm.list" row="item"></todo-list-row><a ng-click="vm.add()" qqq="vm">[add random]</a>',
+      templateUrl: './todo-list/todo-list.template.html',
       controller: TodoListController,
       controllerAs: 'vm'
     });
