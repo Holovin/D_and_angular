@@ -1,10 +1,12 @@
 {
   "todoList": [
     {
-      "name": "one"
+      "name": "one",
+      "status": false
     },
     {
-      "name": "two"
+      "name": "two",
+      "status": true
     }
   ],
 

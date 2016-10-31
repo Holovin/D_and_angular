@@ -1,7 +1,0 @@
-<div class="row" ng-switch="vm.canEdit">
-    <div class="well">
-        <input class="form-control" ng-switch-when="true" type="text" ng-model="vm.value">
-        <span ng-switch-default>Task name: {{vm.value}}</span>
-        <button type="button" class="btn btn-default" ng-click="vm.changeCanEdit()">{{vm.canEdit ? "Save" : "Edit"}}</button>
-    </div>
-</div>

@@ -14,16 +14,10 @@
   function TodoRowController() {
     var vm = this;
 
+    vm.canEdit = false;
+
     console.log(vm, "row controller");
 
-    vm.update = function (prop, value) {
-      console.log(prop, value);
-      vm.onUpdate({
-        row: vm.row,
-        prop: prop,
-        value: value
-      })
-    };
   }
 
 })();

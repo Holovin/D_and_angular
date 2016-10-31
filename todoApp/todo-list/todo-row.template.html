@@ -1,3 +1,16 @@
 <div class="row">
-    <editable-input value="vm.row.name" on-update="vm.update('name', value)"></editable-input>
+
+    <div class="row">
+        <div class="well">
+            <div class="form-inline">
+                <label class="checkbox-inline">
+                    <input type="checkbox" ng-checked="vm.row.status" ng-model="vm.row.status"> 1
+                </label>
+                <input class="form-control" ng-disabled="!vm.canEdit" type="text" ng-model="vm.row.name">
+                <button type="button" class="btn btn-default" ng-click="vm.canEdit = !vm.canEdit">{{vm.canEdit ? "Save" : "Edit"}}</button>
+            </div>
+        </div>
+    </div>
+
+    <!--<editable-input value="vm.row.name" on-update="vm.update('name', value)"></editable-input>-->
 </div>
