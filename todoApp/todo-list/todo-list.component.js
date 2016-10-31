@@ -11,7 +11,7 @@
   TodoListController.$inject =  ['networkService'];
   function TodoListController(networkService) {
     var vm = this;
-    vm.init = init;
+    vm.$oninit = init;
     vm.hey = hey;
     vm.add = add;
 
