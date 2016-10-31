@@ -18,7 +18,7 @@
     init();
 
     function add() {
-      item = {
+      var item = {
         'name': Math.random() % 10
       };
 
