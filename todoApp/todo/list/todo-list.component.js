@@ -11,15 +11,15 @@
   TodoListController.$inject =  ['networkService'];
   function TodoListController(networkService) {
     var vm = this;
-    vm.$oninit = init;
-    vm.hey = hey;
+    vm.init = init;
     vm.add = add;
 
     init();
 
     function add() {
       var item = {
-        'name': Math.random() % 10
+        status: false,
+        'name': ''
       };
 
       vm.list.push(item);
@@ -32,24 +32,11 @@
           throw new Error('Empty file!');
         }
 
-        console.log(vm.list);
         vm.list = res['todoList'];
-
-        for (var i = 0; i < 2; i++) {
-          vm.list[i].name += Math.random() % 10;
-        }
 
       }).catch(function (err) {
         console.log(err);
       });
     }
-
-
-    function hey() {
-      console.log(vm.list);
-    }
-
   }
-
 })();
-
