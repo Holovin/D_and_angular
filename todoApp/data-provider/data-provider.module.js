@@ -1,5 +1,5 @@
 (function () {
 
-  angular.module('todoApp.dataProvider', []);
+  angular.module('dataProvider', []);
 
 })();

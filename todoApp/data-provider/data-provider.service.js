@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('todoApp.dataProvider')
+    .module('dataProvider')
     .factory('networkService', NetworkService);
 
   NetworkService.$inject = ['$http'];
