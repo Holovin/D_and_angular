@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('todoApp')
-    .factory('dataProviderService', DataProviderService);
+    .module('todoApp.dataProvider')
+    .factory('networkService', NetworkService);
 
-  DataProviderService.$inject = ['$http'];
+  NetworkService.$inject = ['$http'];
 
-  function DataProviderService($http) {
+  function NetworkService($http) {
     return {
       getData: getData
     };

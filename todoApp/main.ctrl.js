@@ -1,19 +1,23 @@
 (function () {
   'use strict';
 
-  angular.module('todoApp').controller('MainCtrl', MainCtrl);
-  MainCtrl.$inject = ['dataProviderService'];
-  
-  function MainCtrl(dataProvider) {
+  angular
+    .module('todoApp')
+    .controller('MainCtrl', MainCtrl);
+
+  MainCtrl.$inject = ['networkService'];
+
+  function MainCtrl(networkService) {
     var vm = this;
 
     init();
 
     function init() {
-      dataProvider.getData().then(function (res) {
+      networkService.getData().then(function (res) {
         vm.data = res;
       });
+
     }
   }
-  
+
 })();
