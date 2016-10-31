@@ -4,17 +4,26 @@
     .component('todoListRow', {
       templateUrl: './todo-list/todo-row.template.html',
       controller: TodoRowController,
+      controllerAs: 'vm',
       bindings: {
-        row: '<'
+        row: '=',
+        onUpdate: '&'
       }
     });
 
   function TodoRowController() {
     var vm = this;
 
-    vm.setValue = function (val) {
-      vm.data = val;
-    }
+    console.log(vm, "row controller");
+
+    vm.update = function (prop, value) {
+      console.log(prop, value);
+      vm.onUpdate({
+        row: vm.row,
+        prop: prop,
+        value: value
+      })
+    };
   }
 
 })();
