@@ -2,8 +2,8 @@
 
   angular
     .module('todoApp')
-    .component('todoFooter', {
-      templateUrl: './todo/footer/todo-footer.template.html',
+    .component('todoControls', {
+      templateUrl: './todo/controls/todo-controls.template.html',
       controller: TodoFooterController,
       controllerAs: 'vm',
       require: {
