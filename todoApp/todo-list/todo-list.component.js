@@ -13,8 +13,16 @@
     var vm = this;
 
     networkService.getData().then(function (res) {
-      vm.list = res.todoList;
+
+      if (!res['todoList']) {
+        throw new Error('Empty file!');
+      }
+
       console.log(vm.list);
+      vm.list = res['todoList'];
+
+    }).catch(function (err) {
+      console.log(err);
     });
 
 
