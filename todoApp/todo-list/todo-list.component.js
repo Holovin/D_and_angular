@@ -2,7 +2,7 @@
   angular
     .module('todoApp')
     .component('todoList', {
-      template: '<todo-list-row ng-repeat="row in vm.list" row="row"></todo-list-row>',
+      template: '<todo-list-row ng-repeat="item in vm.list" row="item"></todo-list-row>',
       controller: TodoListController,
       controllerAs: 'vm'
     });
