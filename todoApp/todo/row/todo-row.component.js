@@ -2,7 +2,7 @@
   angular
     .module('todoApp')
     .component('todoListRow', {
-      templateUrl: './todo-list/todo-row.template.html',
+      templateUrl: './todo/row/todo-row.template.html',
       controller: TodoRowController,
       controllerAs: 'vm',
       bindings: {
@@ -15,9 +15,6 @@
     var vm = this;
 
     vm.canEdit = false;
-
-    console.log(vm, "row controller");
-
   }
 
 })();

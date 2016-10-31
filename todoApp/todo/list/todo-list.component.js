@@ -3,7 +3,7 @@
   angular
     .module('todoApp')
     .component('todoList', {
-      templateUrl: './todo-list/todo-list.template.html',
+      templateUrl: './todo/list/todo-list.template.html',
       controller: TodoListController,
       controllerAs: 'vm'
     });
@@ -21,7 +21,6 @@
       var item = {
         'name': Math.random() % 10
       };
-
 
       vm.list.push(item);
     }
@@ -47,7 +46,7 @@
 
 
     function hey() {
-      console.log("hop!");
+      console.log(vm.list);
     }
 
   }
