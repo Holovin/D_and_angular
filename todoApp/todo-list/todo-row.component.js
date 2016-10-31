@@ -2,7 +2,7 @@
   angular
     .module('todoApp')
     .component('todoListRow', {
-      template: '<ul>{{$ctrl.row.name}}</ul>',
+      templateUrl: './todo-list/todo-row.template.html',
       controller: TodoRowController,
       bindings: {
         row: '<'
