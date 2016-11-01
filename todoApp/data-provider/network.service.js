@@ -12,8 +12,8 @@
       getData: getData
     };
 
-    function getData() {
-      return $http.get('data.json').then(function(res) {
+    function getData(url) {
+      return $http.get(url).then(function(res) {
         return res.data;
       })
     }

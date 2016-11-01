@@ -51,7 +51,7 @@
     }
 
     function init() {
-      networkService.getData().then(function (res) {
+      networkService.getData('data/data.json').then(function (res) {
 
         if (!res['todoList']) {
           throw new Error('Empty file!');
