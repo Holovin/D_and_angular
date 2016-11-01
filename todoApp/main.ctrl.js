@@ -9,15 +9,6 @@
 
   function MainCtrl(networkService) {
     var vm = this;
-
-    init();
-
-    function init() {
-      networkService.getData().then(function (res) {
-        vm.data = res;
-      });
-
-    }
   }
 
 })();
