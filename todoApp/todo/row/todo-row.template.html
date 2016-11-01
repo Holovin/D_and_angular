@@ -5,7 +5,7 @@
                 <label class="checkbox-inline">
                     <input type="checkbox" ng-checked="vm.row.status" ng-model="vm.row.status"> Task name:
                 </label>
-                <input class="form-control" ng-disabled="!vm.canEdit" type="text" ng-model="vm.row.name">
+                <input class="form-control" ng-disabled="!vm.canEdit" type="text" ng-model="vm.name">
                 <button type="button" class="btn btn-default" ng-click="vm.edit()">{{vm.canEdit ? "Save" : "Edit"}}</button>
                 <button type="button" class="btn btn-default" ng-click="vm.remove()">Remove</button>
             </div>
