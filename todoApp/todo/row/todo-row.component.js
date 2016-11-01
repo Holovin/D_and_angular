@@ -1,4 +1,5 @@
 (function () {
+
   angular
     .module('todoApp')
     .component('todoListRow', {
@@ -22,8 +23,6 @@
         row: vm.row
       })
     }
-
   }
 
 })();
-
