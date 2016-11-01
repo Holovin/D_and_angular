@@ -17,7 +17,7 @@
                 <div class="col-md-10">
                     <h1 ng-bind-template="Hi, {{vm.user.name}}!"></h1>
                     <hr>
-                    <todo-list list="vm.list"></todo-list>
+                    <todo-list list="vm.list" on-update="vm.refresh()"></todo-list>
                 </div>
             </div>
         </div>

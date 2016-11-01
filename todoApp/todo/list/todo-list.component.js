@@ -7,7 +7,8 @@
       controller: TodoListController,
       controllerAs: 'vm',
       bindings: {
-        list: '='
+        list: '=',
+        onUpdate: '&'
       }
     });
 
@@ -20,6 +21,7 @@
     vm.loadLS = loadLS;
     vm.saveLS = saveLS;
     vm.remove = removeRow;
+    vm.update = update;
 
     function add() {
       var item = {
@@ -48,6 +50,10 @@
 
     function saveLS() {
       localStorageService.setData('todo', vm.list);
+    }
+
+    function update() {
+      vm.onUpdate();
     }
   }
 

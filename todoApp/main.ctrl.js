@@ -9,7 +9,27 @@
 
   function MainCtrl(networkService) {
     var vm = this;
-    var baseUrl = 'data/users.json';
+
+    vm.refresh = refresh;
+
+    refresh();
+
+    function refresh() {
+      getUsers('data/users.json')
+        .then(function (res) {
+          return getUserList(res);
+        })
+        .then(function (res) {
+          return getUserMeet(res)
+        })
+        .then(function (res) {
+          // TODO: do something with meetings
+          //console.log(res);
+        })
+        .catch(function a(err) {
+          console.log("Fatality error (promise win): ", err);
+        })
+    }
 
     function getUsers(url) {
       return networkService.getData(url).then(function (res) {
@@ -43,20 +63,7 @@
       });
     }
 
-    getUsers(baseUrl)
-      .then(function (res) {
-        return getUserList(res);
-      })
-      .then(function (res) {
-        return getUserMeet(res)
-      })
-      .then(function (res) {
-        // TODO: do something with meetings
-        //console.log(res);
-      })
-      .catch(function a(err) {
-        console.log("Fatality error (promise win): ", err);
-    })
+
   }
 
 })();
