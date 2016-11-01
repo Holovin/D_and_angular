@@ -8,7 +8,7 @@
       controller: TodoListController,
       controllerAs: 'vm',
       bindings: {
-        list: '=',
+        list: '<',
         onUpdate: '&'
       }
     });
