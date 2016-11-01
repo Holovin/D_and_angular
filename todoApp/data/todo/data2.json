@@ -7,8 +7,12 @@
     {
       "name": "two",
       "status": true
+    },
+    {
+      "name": "wtt",
+      "status": true
     }
   ],
 
-  "meetingsUrl": "TODO!"
+  "meetingsUrl": "data/meet/data2.json"
 }

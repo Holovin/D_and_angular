@@ -1,0 +1,18 @@
+{
+  "todoList": [
+    {
+      "name": "one",
+      "status": false
+    },
+    {
+      "name": "two",
+      "status": true
+    },
+    {
+      "name": "wtt",
+      "status": true
+    }
+  ],
+
+  "meetingsUrl": "data/meet/data1.json"
+}
