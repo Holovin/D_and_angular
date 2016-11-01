@@ -16,13 +16,19 @@
     var vm = this;
 
     vm.canEdit = false;
+    vm.edit = edit;
     vm.remove = remove;
+
+    function edit() {
+      vm.canEdit = !vm.canEdit;
+    }
 
     function remove() {
       vm.onRemove({
         row: vm.row
       })
     }
+
   }
 
 })();
