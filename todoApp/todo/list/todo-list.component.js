@@ -8,11 +8,15 @@
       controllerAs: 'vm'
     });
 
-  TodoListController.$inject =  ['networkService'];
-  function TodoListController(networkService) {
+  TodoListController.$inject =  ['networkService', 'localStorageService'];
+
+  function TodoListController(networkService, localStorageService) {
     var vm = this;
+
     vm.init = init;
     vm.add = add;
+    vm.loadLS = loadLS;
+    vm.saveLS = saveLS;
 
     init();
 
@@ -23,6 +27,18 @@
       };
 
       vm.list.push(item);
+    }
+
+    function loadLS() {
+      vm.list = localStorageService.getData('todo');
+
+      if (angular.equals({}, vm.list)) {
+        vm.list = [];
+      }
+    }
+
+    function saveLS() {
+      localStorageService.setData('todo', vm.list);
     }
 
     function init() {
@@ -39,4 +55,5 @@
       });
     }
   }
+
 })();

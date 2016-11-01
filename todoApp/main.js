@@ -1,7 +1,8 @@
 (function() {
 
   angular.module('todoApp', [
-    'dataProvider'
+    'dataProvider',
+    'storage'
   ]);
 
 })();

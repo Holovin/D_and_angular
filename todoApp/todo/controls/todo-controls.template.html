@@ -2,8 +2,8 @@
     <div class="col-md-10">
         <div class="form-group">
             <button class="btn btn-default" ng-click="vm.parent.add()">Add record</button>
-            <button class="btn btn-default" disabled>Save to LS</button>
-            <button class="btn btn-default" disabled>Load from LS</button>
+            <button class="btn btn-default" ng-click="vm.parent.loadLS()">Load from LS</button>
+            <button class="btn btn-default" ng-click="vm.parent.saveLS()">Save to LS</button>
             <button class="btn btn-default" ng-click="vm.parent.init()">Load random from server</button>
         </div>
     </div>
