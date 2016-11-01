@@ -17,6 +17,9 @@
   function TodoListController(localStorageService) {
     var vm = this;
 
+    vm.reverseFlag = false;
+    vm.propertyName = null;
+
     vm.add = add;
     vm.loadLS = loadLS;
     vm.saveLS = saveLS;
