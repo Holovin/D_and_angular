@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('todoApp')
+    .module('todoApp.ui')
     .component('todoHeader', {
       templateUrl: './todo/header/todo-header.template.html',
       controller: TodoFooterController,
