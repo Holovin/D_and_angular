@@ -3,7 +3,7 @@
         <div class="well">
             <div class="col-md-10">
                 <div class="form-inline">
-                    <input type="checkbox" ng-checked="vm.row.status" ng-model="vm.row.status">
+                    <input type="checkbox" ng-checked="vm.status" ng-disabled="!vm.canEdit" ng-model="vm.status">
                     <label>
                         Task name:
                         <input class="form-control" ng-disabled="!vm.canEdit" type="text" ng-model="vm.name">

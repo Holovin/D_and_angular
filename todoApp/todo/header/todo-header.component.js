@@ -21,6 +21,9 @@
       }, {
         sortField: 'name',
         displayName: 'Name'
+      }, {
+        sortField: 'status',
+        displayName: 'Status'
       }
     ];
 

@@ -21,12 +21,14 @@
 
     function init() {
       vm.name = vm.row.name;
+      vm.status = vm.row.status;
       vm.canEdit = false;
     }
 
     function edit() {
       if (vm.canEdit) {
         vm.row.name = vm.name;
+        vm.row.status = vm.status;
       }
 
       vm.canEdit = !vm.canEdit;
