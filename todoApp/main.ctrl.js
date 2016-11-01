@@ -29,8 +29,6 @@
         }
 
         vm.list = res.todoList;
-        console.log('list', vm.list);
-
         return res.meetingsUrl;
       });
     }
