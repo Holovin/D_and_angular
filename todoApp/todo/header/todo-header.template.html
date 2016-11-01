@@ -1,0 +1,16 @@
+<div class="row" ng-hide="!vm.sortItems">
+    <div class="col-md-10">
+        <div class="well">
+            <div class="form-group">
+                <div class="col-md-10">
+                        <select ng-model="vm.sortSelected" ng-options="x.displayName for x in vm.sortItems"
+                                ng-change="vm.sortList(vm.sortSelected.sortField)" class="form-control"></select>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary" ng-click="vm.sortReverse()">Reverse</button>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
