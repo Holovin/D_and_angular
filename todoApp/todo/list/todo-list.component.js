@@ -17,16 +17,25 @@
     vm.add = add;
     vm.loadLS = loadLS;
     vm.saveLS = saveLS;
-
+    vm.remove = removeRow;
     init();
+
 
     function add() {
       var item = {
         status: false,
         'name': ''
       };
-
       vm.list.push(item);
+
+    }
+
+    function removeRow(row) {
+      var index = vm.list.indexOf(row);
+
+      if (index >= 0) {
+        vm.list.splice(index, 1);
+      }
     }
 
     function loadLS() {

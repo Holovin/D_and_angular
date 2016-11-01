@@ -6,8 +6,8 @@
       controller: TodoRowController,
       controllerAs: 'vm',
       bindings: {
-        row: '=',
-        onUpdate: '&'
+        row: '<',
+        onRemove: '&'
       }
     });
 
@@ -15,6 +15,14 @@
     var vm = this;
 
     vm.canEdit = false;
+    vm.remove = remove;
+
+    function remove() {
+      vm.onRemove({
+        row: vm.row
+      })
+    }
+
   }
 
 })();
