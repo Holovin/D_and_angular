@@ -12,12 +12,12 @@
     </head>
 
     <body>
-        <div class="container" ng-controller="MainCtrl as main">
+        <div class="container" ng-controller="MainCtrl as vm">
             <div class="row">
                 <div class="col-md-10">
-                    <h1>Todo app</h1>
+                    <h1 ng-bind-template="Hi, {{vm.user.name}}!"></h1>
                     <hr>
-                    <todo-list></todo-list>
+                    <todo-list list="vm.list"></todo-list>
                 </div>
             </div>
         </div>

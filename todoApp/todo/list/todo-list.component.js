@@ -5,21 +5,21 @@
     .component('todoList', {
       templateUrl: './todo/list/todo-list.template.html',
       controller: TodoListController,
-      controllerAs: 'vm'
+      controllerAs: 'vm',
+      bindings: {
+        list: '='
+      }
     });
 
-  TodoListController.$inject =  ['networkService', 'localStorageService'];
+  TodoListController.$inject =  ['localStorageService'];
 
-  function TodoListController(networkService, localStorageService) {
+  function TodoListController(localStorageService) {
     var vm = this;
 
-    vm.init = init;
     vm.add = add;
     vm.loadLS = loadLS;
     vm.saveLS = saveLS;
     vm.remove = removeRow;
-    init();
-
 
     function add() {
       var item = {
@@ -48,20 +48,6 @@
 
     function saveLS() {
       localStorageService.setData('todo', vm.list);
-    }
-
-    function init() {
-      networkService.getData('data/data.json').then(function (res) {
-
-        if (!res['todoList']) {
-          throw new Error('Empty file!');
-        }
-
-        vm.list = res['todoList'];
-
-      }).catch(function (err) {
-        console.log(err);
-      });
     }
   }
 
