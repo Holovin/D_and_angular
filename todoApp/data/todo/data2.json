@@ -1,15 +1,15 @@
 {
   "todoList": [
     {
-      "name": "one",
+      "name": "Horosho",
       "status": false
     },
     {
-      "name": "two",
-      "status": true
+      "name": "Juvet na svete",
+      "status": false
     },
     {
-      "name": "wtt",
+      "name": "Winnee-poooshkkkkk",
       "status": true
     }
   ],

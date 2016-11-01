@@ -1,15 +1,15 @@
 {
   "todoList": [
     {
-      "name": "one",
+      "name": "Burya mglou",
       "status": false
     },
     {
-      "name": "two",
+      "name": "Nebo kroet",
       "status": true
     },
     {
-      "name": "wtt",
+      "name": "Vihri snejnie krutya",
       "status": true
     }
   ],
