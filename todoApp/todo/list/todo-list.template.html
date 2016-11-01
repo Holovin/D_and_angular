@@ -1,4 +1,5 @@
 <todo-controls></todo-controls>
 <todo-header></todo-header>
-<todo-list-row ng-repeat="item in vm.list | orderBy: vm.propertyName : vm.reverseFlag" row="item" on-remove="vm.remove(row)"></todo-list-row>
+<todo-list-row ng-repeat="item in vm.list | orderBy: vm.propertyName : vm.reverseFlag | filter: vm.filter : vm.filterStrictFlag"
+               row="item" on-remove="vm.remove(row)"></todo-list-row>
 <todo-controls></todo-controls>

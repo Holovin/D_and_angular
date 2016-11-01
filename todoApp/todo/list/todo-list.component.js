@@ -20,6 +20,9 @@
     vm.reverseFlag = false;
     vm.propertyName = null;
 
+    vm.filterStrictFlag = false;
+    vm.filter = null;
+
     vm.add = add;
     vm.loadLS = loadLS;
     vm.saveLS = saveLS;
@@ -31,8 +34,8 @@
         status: false,
         'name': ''
       };
-      vm.list.push(item);
 
+      vm.list.push(item);
     }
 
     function removeRow(row) {

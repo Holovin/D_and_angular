@@ -27,13 +27,20 @@
       }
     ];
 
+    vm.filter = {
+      name: '',
+      status: ''
+    };
+
     vm.$onInit = init;
     vm.sortList = sortList;
     vm.sortReverse = sortReverse;
+    vm.filterList = filterList;
+    vm.filterStrict = filterStrict;
 
     function init() {
-      // ng-init can this too
       vm.sortSelected = vm.sortItems[0];
+      vm.filterList(vm.filter);
     }
 
     function sortList(propertyName) {
@@ -47,6 +54,13 @@
       vm.parent.reverseFlag = !vm.parent.reverseFlag;
     }
 
+    function filterList(filter) {
+      vm.parent.filter = filter;
+    }
+
+    function filterStrict() {
+      vm.parent.filterStrictFlag = !vm.parent.filterStrictFlag;
+    }
   }
 
 })();

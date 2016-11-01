@@ -1,15 +1,31 @@
 <div class="row" ng-hide="!vm.sortItems || vm.parent.list.length === 0">
     <div class="col-md-10">
         <div class="well">
-            <div class="form-group">
-                <div class="col-md-10">
-                        <select ng-model="vm.sortSelected" ng-options="x.displayName for x in vm.sortItems"
-                                ng-change="vm.sortList(vm.sortSelected.sortField)" class="form-control"></select>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <input class="form-control" ng-model="vm.filter.name" type="text" placeholder="Filter by name"
+                               ng-change="vm.filterList(vm.filter)"/>
+                    </div>
+                    <div class="col-md-2">
+                        <!--<button class="btn btn-primary pull-right"-->
+                                <!--ng-click="vm.filterStrict()" ng-class="{active: vm.parent.filterStrictFlag}">-->
+                            <!--Strict mode-->
+                        <!--</button>-->
+                    </div>
+
+                    <div class="col-md-4">
+                            <select ng-model="vm.sortSelected" ng-options="x.displayName for x in vm.sortItems"
+                                    ng-change="vm.sortList(vm.sortSelected.sortField)" class="form-control"></select>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary pull-right"
+                                ng-click="vm.sortReverse()" ng-class="{active: vm.parent.reverseFlag}">
+                            Reverse
+                        </button>
+                    </div>
+                    <br>
                 </div>
-                <div class="col-md-2">
-                    <button class="btn btn-primary pull-right" ng-click="vm.sortReverse()">Reverse</button>
-                </div>
-                <br>
             </div>
         </div>
     </div>
