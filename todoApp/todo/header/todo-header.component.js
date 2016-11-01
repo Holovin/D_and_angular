@@ -1,4 +1,5 @@
 (function () {
+  'use strict';
 
   angular
     .module('todoApp')
@@ -44,8 +45,6 @@
     }
 
     function sortList(propertyName) {
-      console.log(propertyName);
-
       vm.parent.reverseFlag = (propertyName === vm.parent.propertyName) ? !vm.parent.reverseFlag : false;
       vm.parent.propertyName = propertyName;
     }
