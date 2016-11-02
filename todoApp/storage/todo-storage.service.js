@@ -17,6 +17,7 @@
       setData: setData,
 
       addItem: addItem,
+      addEmptyItem: addEmptyItem,
       removeItem: removeItem,
 
       loadHttp: loadHttp,
