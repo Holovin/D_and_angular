@@ -1,6 +1,6 @@
 (function () {
-    'use strict';
 
-    angular.module('todoApp.ui', []);
+  'use strict';
+  angular.module('todoApp.ui', []);
 
 })();
