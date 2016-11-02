@@ -7,17 +7,6 @@
 <todo-task ng-repeat="item in vm.list | orderBy: vm.propertyName : vm.reverseFlag | filter: vm.filter : vm.filterStrictFlag"
         task="item" on-remove-item="vm.removeItem(taskItem)"></todo-task>
 
-<div class="row" ng-hide="vm.list.length > 0">
-    <div class="col-md-10">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                Ooops...
-            </div>
-            <div class="panel-body">
-                Nothing to show :(
-            </div>
-        </div>
-    </div>
-</div>
+<empty-fill list="vm.list"></empty-fill>
 
 <todo-controls></todo-controls>
