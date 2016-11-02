@@ -29,8 +29,10 @@
     }
 
     function updateLocalInput() {
-      vm.taskLocal.name = vm.task.name;
-      vm.taskLocal.status = vm.task.status;
+      if (vm.taskLocal) {
+        vm.taskLocal.name = vm.task.name;
+        vm.taskLocal.status = vm.task.status;
+      }
     }
 
     function edit() {
