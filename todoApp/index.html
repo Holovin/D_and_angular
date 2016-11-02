@@ -15,9 +15,10 @@
         <div class="container" ng-controller="MainCtrl as vm">
             <div class="row">
                 <div class="col-md-10">
-                    <h1 ng-bind-template="Hi, {{vm.user.name}}!"></h1>
+                    <h1>Hi, {{ vm.user.name }}</h1>
                     <hr>
-                    <todo-list list="vm.list" on-update="vm.refresh()"></todo-list>
+                    <todo-list list="vm.todo" on-refresh="vm.refresh()" on-load-local-storage="vm.loadLS()"
+                    on-save-local-storage="vm.saveLS()"></todo-list>
                 </div>
             </div>
         </div>
@@ -30,6 +31,7 @@
 
         <script src="./storage/storage.module.js"></script>
         <script src="./storage/local-storage.service.js"></script>
+        <script src="./storage/todo-storage.service.js"></script>
 
         <script src="./todo/todo.module.js"></script>
         <script src="./todo/list/todo-list.component.js"></script>

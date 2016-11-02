@@ -5,63 +5,50 @@
     .module('todoApp')
     .controller('MainCtrl', MainCtrl);
 
-  MainCtrl.$inject = ['networkService'];
+  MainCtrl.$inject = ['todoStorageService'];
 
-  function MainCtrl(networkService) {
+  function MainCtrl(todoStorageService) {
     var vm = this;
 
+    vm.$onInit = init;
     vm.refresh = refresh;
+    vm.loadLS = loadLS;
+    vm.saveLS = saveLS;
 
-    refresh();
+    function init() {
+      vm.todo = [];
+      refresh();
+    }
+
 
     function refresh() {
-      getUsers('data/users.json')
-        .then(function (res) {
-          return getUserList(res);
-        })
-        .then(function (res) {
-          return getUserMeet(res)
-        })
-        .then(function (res) {
-          // TODO: do something with meetings
-          //console.log(res);
-        })
-        .catch(function a(err) {
-          console.log("Fatality error (promise win): ", err);
-        })
-    }
-
-    function getUsers(url) {
-      return networkService.getData(url).then(function (res) {
-        if (!res.users) {
-          throw new Error('Wrong users file!');
-        }
-
-        vm.user = res.users[Math.floor(Math.random() * res.users.length)];
-        return vm.user.url;
+      todoStorageService.loadHttp().then(function () {
+        _grabDataFromService();
       });
     }
 
-    function getUserList(url) {
-      return networkService.getData(url).then(function (res) {
-        if (!res.todoList) {
-          throw new Error('Wrong user todo file!');
-        }
-
-        vm.list = res.todoList;
-        return res.meetingsUrl;
-      });
+    function loadLS() {
+      todoStorageService.loadLS();
+      _grabDataFromService();
     }
 
-    function getUserMeet(url) {
-      return networkService.getData(url).then(function (res) {
-        if (!res.meetings) {
-          throw new Error('Wrong user meet file!');
-        }
-
-        return res;
-      });
+    function saveLS() {
+      _setDataService();
+      todoStorageService.saveLS();
     }
+
+    function _grabDataFromService() {
+      vm.todo = todoStorageService.getData();
+      vm.user = todoStorageService.getUser();
+
+      console.log('MainCtrl data: ', vm.todo);
+    }
+
+    function _setDataService() {
+      todoStorageService.setData(vm.todo);
+    }
+
+
   }
 
 })();
