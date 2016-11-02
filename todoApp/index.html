@@ -14,7 +14,8 @@
 
     <body>
         <div class="container" ng-controller="MainCtrl as vm">
-            <div class="row">
+            <h1 ng-hide="vm.user">Loading...</h1>
+            <div class="row" ng-cloak>
                 <div class="col-md-10">
                     <h1>Hi, {{ vm.user.name }}</h1>
                     <hr>
