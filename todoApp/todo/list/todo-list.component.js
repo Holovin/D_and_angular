@@ -9,58 +9,38 @@
       controllerAs: 'vm',
       bindings: {
         list: '<',
-        onUpdate: '&'
+        onRefresh: '&',
+        onLoadLocalStorage: '&',
+        onSaveLocalStorage: '&'
       }
     });
 
-  TodoListController.$inject =  ['localStorageService'];
-
-  function TodoListController(localStorageService) {
+  function TodoListController() {
     var vm = this;
 
-    vm.reverseFlag = false;
-    vm.propertyName = null;
-
-    vm.filterStrictFlag = false;
-    vm.filter = null;
-
-    vm.add = add;
+    vm.$onInit = init;
+    vm.refresh = refresh;
     vm.loadLS = loadLS;
     vm.saveLS = saveLS;
-    vm.remove = removeRow;
-    vm.update = update;
 
-    function add() {
-      var item = {
-        status: false,
-        'name': ''
-      };
+    function init() {
+      vm.reverseFlag = false;
+      vm.propertyName = null;
 
-      vm.list.push(item);
+      vm.filterStrictFlag = false;
+      vm.filter = null;
     }
 
-    function removeRow(row) {
-      var index = vm.list.indexOf(row);
-
-      if (index >= 0) {
-        vm.list.splice(index, 1);
-      }
+    function refresh() {
+      vm.onRefresh();
     }
 
     function loadLS() {
-      vm.list = localStorageService.getData('todo');
-
-      if (angular.equals({}, vm.list)) {
-        vm.list = [];
-      }
+      vm.onLoadLocalStorage();
     }
 
     function saveLS() {
-      localStorageService.setData('todo', vm.list);
-    }
-
-    function update() {
-      vm.onUpdate();
+      vm.onSaveLocalStorage();
     }
   }
 
