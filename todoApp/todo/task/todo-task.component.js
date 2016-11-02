@@ -5,7 +5,7 @@
     .module('todoApp.ui')
     .component('todoTask', {
       templateUrl: './todo/task/todo-task.template.html',
-      controller: TodoRowController,
+      controller: TodoTaskController,
       controllerAs: 'vm',
       bindings: {
         task: '<',
@@ -13,7 +13,7 @@
       }
     });
 
-  function TodoRowController() {
+  function TodoTaskController() {
     var vm = this;
 
     vm.$onInit = init;
