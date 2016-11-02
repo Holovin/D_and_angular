@@ -75,11 +75,14 @@
     }
 
     function loadLS() {
-      _todo = localStorageService.getData('todo');
+      var newTodo = localStorageService.getData('todo');
 
-      if (angular.equals({}, _todo)) {
+      if (angular.equals({}, newTodo)) {
         _todo = [];
+      } else {
+        _todo = newTodo;
       }
+
     }
 
     function saveLS() {

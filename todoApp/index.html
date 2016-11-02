@@ -18,7 +18,7 @@
                     <h1>Hi, {{ vm.user.name }}</h1>
                     <hr>
                     <todo-list list="vm.todo" on-refresh="vm.refresh()" on-load-local-storage="vm.loadLS()"
-                    on-save-local-storage="vm.saveLS()"></todo-list>
+                    on-save-local-storage="vm.saveLS()" on-remove-item="vm.removeItem(taskItem)"></todo-list>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
 
         <script src="./todo/todo.module.js"></script>
         <script src="./todo/list/todo-list.component.js"></script>
-        <script src="./todo/row/todo-row.component.js"></script>
+        <script src="./todo/task/todo-task.component.js"></script>
         <script src="./todo/controls/todo-controls.component.js"></script>
         <script src="./todo/header/todo-header.component.js"></script>
     </body>

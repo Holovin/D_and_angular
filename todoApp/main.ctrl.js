@@ -14,12 +14,12 @@
     vm.refresh = refresh;
     vm.loadLS = loadLS;
     vm.saveLS = saveLS;
+    vm.removeItem = removeItem;
 
     function init() {
       vm.todo = [];
       refresh();
     }
-
 
     function refresh() {
       todoStorageService.loadHttp().then(function () {
@@ -35,6 +35,10 @@
     function saveLS() {
       _setDataService();
       todoStorageService.saveLS();
+    }
+
+    function removeItem(taskItem) {
+      todoStorageService.removeItem(taskItem);
     }
 
     function _grabDataFromService() {

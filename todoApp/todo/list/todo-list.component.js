@@ -11,7 +11,8 @@
         list: '<',
         onRefresh: '&',
         onLoadLocalStorage: '&',
-        onSaveLocalStorage: '&'
+        onSaveLocalStorage: '&',
+        onRemoveItem: '&'
       }
     });
 
@@ -22,6 +23,7 @@
     vm.refresh = refresh;
     vm.loadLS = loadLS;
     vm.saveLS = saveLS;
+    vm.removeItem = removeItem;
 
     function init() {
       vm.reverseFlag = false;
@@ -41,6 +43,12 @@
 
     function saveLS() {
       vm.onSaveLocalStorage();
+    }
+
+    function removeItem(taskItem) {
+      console.log("Todo list ctr");
+
+      vm.onRemoveItem({taskItem: taskItem});
     }
   }
 
