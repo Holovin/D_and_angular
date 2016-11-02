@@ -82,7 +82,7 @@
     }
 
     function loadLS() {
-      var newTodo = localStorageService.getData('todo');
+      var newTodo = localStorageService.getData(_user.name);
 
       if (angular.equals({}, newTodo)) {
         _todo = [];
@@ -93,7 +93,7 @@
     }
 
     function saveLS() {
-      localStorageService.setData('todo', _todo);
+      localStorageService.setData(_user.name, _todo);
     }
 
     function _getUsers(url) {
