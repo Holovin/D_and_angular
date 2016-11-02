@@ -96,7 +96,7 @@
           throw new Error('Wrong users file!');
         }
 
-        _user = res.users[Math.floor(Math.random() * res.users.length)];
+        _user = res.users[_.random(res.users.length - 1)];
         return _user.url;
       });
     }
