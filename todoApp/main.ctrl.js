@@ -14,6 +14,7 @@
     vm.refresh = refresh;
     vm.loadLS = loadLS;
     vm.saveLS = saveLS;
+    vm.clearLS = clearLS;
     vm.addItem = addItem;
     vm.removeItem = removeItem;
 
@@ -21,6 +22,8 @@
       vm.todo = [];
       vm.user = [];
       vm.meetings = [];
+      vm.lsExist = false;
+
       refresh();
     }
 
@@ -38,6 +41,12 @@
     function saveLS() {
       _setDataService();
       todoStorageService.saveLS();
+      _updateLocalStorageState(true);
+    }
+
+    function clearLS() {
+      todoStorageService.clearLS();
+      _updateLocalStorageState(false);
     }
 
     function addItem() {
@@ -49,10 +58,15 @@
     }
 
 
+    function _updateLocalStorageState(state) {
+      vm.lsExist = state;
+    }
+
     function _grabDataFromService() {
       vm.todo = todoStorageService.getData();
       vm.user = todoStorageService.getUser();
       vm.meetings = todoStorageService.getMeetings();
+      _updateLocalStorageState(todoStorageService.checkLS());
     }
 
     function _setDataService() {

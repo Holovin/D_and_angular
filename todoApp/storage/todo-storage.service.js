@@ -11,6 +11,7 @@
     var _todo = [];
     var _user = [];
     var _meetings = [];
+    var _lsExist = false;
 
     return {
       getUser: getUser,
@@ -23,7 +24,10 @@
       removeItem: removeItem,
 
       loadHttp: loadHttp,
+
       loadLS: loadLS,
+      checkLS: checkLS,
+      clearLS: clearLS,
       saveLS: saveLS
     };
 
@@ -65,17 +69,21 @@
     }
 
     function loadHttp() {
+
+
       return _getUsers('data/users.json')
         .then(function (res) {
           return _getUserList(res);
         })
+
         .then(function (res) {
           return _getUserMeet(res);
         })
+
         .then(function (res) {
-          // TODO: do something with meetings
-          //console.log(res);
+          _lsExist = _checkLS();
         })
+
         .catch(function a(err) {
           console.log("Fatality error (promise win): ", err);
         })
@@ -89,11 +97,25 @@
       } else {
         _todo = newTodo;
       }
-
     }
 
     function saveLS() {
       localStorageService.setData(_user.name, _todo);
+
+      _lsExist = true;
+    }
+
+    function checkLS() {
+      return _lsExist;
+    }
+
+    function clearLS() {
+      localStorageService.removeItem(_user.name);
+    }
+
+    function _checkLS() {
+      var newTodo = localStorageService.getData(_user.name);
+      return !angular.equals({}, newTodo);
     }
 
     function _getUsers(url) {

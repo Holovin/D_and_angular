@@ -18,7 +18,8 @@
                 <div class="col-md-10">
                     <h1>Hi, {{ vm.user.name }}</h1>
                     <hr>
-                    <todo-list list="vm.todo" on-refresh="vm.refresh()" on-load-local-storage="vm.loadLS()"
+                    <todo-list list="vm.todo" ls-exist="vm.lsExist" on-refresh="vm.refresh()"
+                               on-load-local-storage="vm.loadLS()" on-clear-local-storage="vm.clearLS()"
                                on-save-local-storage="vm.saveLS()" on-remove-item="vm.removeItem(taskItem)"
                                on-add-item="vm.addItem()"></todo-list>
                     <hr>

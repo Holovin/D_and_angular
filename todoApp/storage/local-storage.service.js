@@ -8,7 +8,8 @@
   function LocalStorageService() {
     return {
       getData: getData,
-      setData: setData
+      setData: setData,
+      removeItem: removeItem
     };
 
     function getData(name) {
@@ -17,6 +18,10 @@
 
     function setData(name, value) {
       localStorage.setItem(name, JSON.stringify(value));
+    }
+
+    function removeItem(name) {
+      localStorage.removeItem(name);
     }
   }
 
