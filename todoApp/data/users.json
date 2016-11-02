@@ -7,6 +7,10 @@
     {
       "name": "Winnee-poooshkeeeen",
       "url": "data/todo/data2.json"
+    },
+    {
+      "name": "Freeman",
+      "url": "data/todo/data3.json"
     }
   ]
 }
