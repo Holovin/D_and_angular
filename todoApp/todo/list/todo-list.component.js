@@ -12,7 +12,8 @@
         onRefresh: '&',
         onLoadLocalStorage: '&',
         onSaveLocalStorage: '&',
-        onRemoveItem: '&'
+        onRemoveItem: '&',
+        onAddItem: '&'
       }
     });
 
@@ -21,8 +22,11 @@
 
     vm.$onInit = init;
     vm.refresh = refresh;
+
     vm.loadLS = loadLS;
     vm.saveLS = saveLS;
+
+    vm.addItem = addItem;
     vm.removeItem = removeItem;
 
     function init() {
@@ -45,9 +49,11 @@
       vm.onSaveLocalStorage();
     }
 
-    function removeItem(taskItem) {
-      console.log("Todo list ctr");
+    function addItem() {
+      vm.onAddItem();
+    }
 
+    function removeItem(taskItem) {
       vm.onRemoveItem({taskItem: taskItem});
     }
   }

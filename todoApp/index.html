@@ -19,7 +19,8 @@
                     <h1>Hi, {{ vm.user.name }}</h1>
                     <hr>
                     <todo-list list="vm.todo" on-refresh="vm.refresh()" on-load-local-storage="vm.loadLS()"
-                    on-save-local-storage="vm.saveLS()" on-remove-item="vm.removeItem(taskItem)"></todo-list>
+                               on-save-local-storage="vm.saveLS()" on-remove-item="vm.removeItem(taskItem)"
+                               on-add-item="vm.addItem()"></todo-list>
                 </div>
             </div>
         </div>

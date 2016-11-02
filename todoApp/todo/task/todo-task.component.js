@@ -17,22 +17,29 @@
     var vm = this;
 
     vm.$onInit = init;
+    vm.$onChanges = updateLocalInput;
     vm.edit = edit;
     vm.removeItem = removeItem;
 
     function init() {
-      vm.name = vm.task.name;
-      vm.status = vm.task.status;
+      vm.taskLocal = {};
       vm.canEdit = false;
+
+      updateLocalInput();
+    }
+
+    function updateLocalInput() {
+      vm.taskLocal.name = vm.task.name;
+      vm.taskLocal.status = vm.task.status;
     }
 
     function edit() {
-      // if (vm.canEdit) {
-      //   vm.task.name = vm.name;
-      //   vm.task.status = vm.status;
-      // }
-      //
-      // vm.canEdit = !vm.canEdit;
+      if (vm.canEdit) {
+        vm.task.name = vm.taskLocal.name;
+        vm.task.status = vm.taskLocal.status;
+      }
+
+      vm.canEdit = !vm.canEdit;
     }
 
     function removeItem() {

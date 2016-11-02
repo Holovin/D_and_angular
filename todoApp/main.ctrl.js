@@ -14,6 +14,7 @@
     vm.refresh = refresh;
     vm.loadLS = loadLS;
     vm.saveLS = saveLS;
+    vm.addItem = addItem;
     vm.removeItem = removeItem;
 
     function init() {
@@ -37,22 +38,23 @@
       todoStorageService.saveLS();
     }
 
+    function addItem() {
+      todoStorageService.addEmptyItem();
+    }
+
     function removeItem(taskItem) {
       todoStorageService.removeItem(taskItem);
     }
 
+
     function _grabDataFromService() {
       vm.todo = todoStorageService.getData();
       vm.user = todoStorageService.getUser();
-
-      console.log('MainCtrl data: ', vm.todo);
     }
 
     function _setDataService() {
       todoStorageService.setData(vm.todo);
     }
-
-
   }
 
 })();
