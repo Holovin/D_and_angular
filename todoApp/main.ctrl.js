@@ -19,6 +19,8 @@
 
     function init() {
       vm.todo = [];
+      vm.user = [];
+      vm.meetings = [];
       refresh();
     }
 
@@ -50,6 +52,7 @@
     function _grabDataFromService() {
       vm.todo = todoStorageService.getData();
       vm.user = todoStorageService.getUser();
+      vm.meetings = todoStorageService.getMeetings();
     }
 
     function _setDataService() {

@@ -10,9 +10,11 @@
   function TodoStorageService(localStorageService, networkService) {
     var _todo = [];
     var _user = [];
+    var _meetings = [];
 
     return {
       getUser: getUser,
+      getMeetings: getMeetings,
       getData: getData,
       setData: setData,
 
@@ -27,6 +29,10 @@
 
     function getUser() {
       return _user;
+    }
+
+    function getMeetings() {
+      return  _meetings;
     }
 
     function getData() {
@@ -64,7 +70,7 @@
           return _getUserList(res);
         })
         .then(function (res) {
-          return _getUserMeet(res)
+          return _getUserMeet(res);
         })
         .then(function (res) {
           // TODO: do something with meetings
@@ -115,8 +121,10 @@
     function _getUserMeet(url) {
       return networkService.getData(url).then(function (res) {
         if (!res.meetings) {
-          throw new Error('Wrong user meet file!');
+          throw new Error('Wrong user meetings file!');
         }
+
+        _meetings = res.meetings;
 
         return res;
       });

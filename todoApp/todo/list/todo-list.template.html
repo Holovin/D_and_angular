@@ -1,6 +1,8 @@
-<todo-controls></todo-controls>
+<h4>Todo list</h4>
 
 <todo-header></todo-header>
+
+<todo-controls></todo-controls>
 
 <todo-task ng-repeat="item in vm.list | orderBy: vm.propertyName : vm.reverseFlag | filter: vm.filter : vm.filterStrictFlag"
         task="item" on-remove-item="vm.removeItem(taskItem)"></todo-task>
