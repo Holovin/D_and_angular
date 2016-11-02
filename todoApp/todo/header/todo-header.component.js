@@ -15,24 +15,6 @@
   function TodoFooterController() {
     var vm = this;
 
-    vm.sortItems = [
-      {
-        sortField: null,
-        displayName: 'No sort '
-      }, {
-        sortField: 'name',
-        displayName: 'Name'
-      }, {
-        sortField: 'status',
-        displayName: 'Status'
-      }
-    ];
-
-    vm.filter = {
-      name: '',
-      status: ''
-    };
-
     vm.$onInit = init;
     vm.sortList = sortList;
     vm.sortReverse = sortReverse;
@@ -40,6 +22,24 @@
     vm.filterStrict = filterStrict;
 
     function init() {
+      vm.sortItems = [
+        {
+          sortField: null,
+          displayName: 'No sort '
+        }, {
+          sortField: 'name',
+          displayName: 'Name'
+        }, {
+          sortField: 'status',
+          displayName: 'Status'
+        }
+      ];
+
+      vm.filter = {
+        name: '',
+        status: ''
+      };
+
       vm.sortSelected = vm.sortItems[0];
       vm.filterList(vm.filter);
     }
