@@ -21,7 +21,7 @@
                     <todo-list list="vm.todo" ls-exist="vm.lsExist" on-refresh="vm.refresh()"
                                on-load-local-storage="vm.loadLS()" on-clear-local-storage="vm.clearLS()"
                                on-save-local-storage="vm.saveLS()" on-remove-item="vm.removeItem(taskItem)"
-                               on-add-item="vm.addItem()"></todo-list>
+                               on-add-item="vm.addItem(taskItem)"></todo-list>
                     <hr>
                     <todo-meetings meetings="vm.meetings"></todo-meetings>
                 </div>
@@ -41,6 +41,7 @@
         <script src="./todo/todo.module.js"></script>
         <script src="./todo/list/todo-list.component.js"></script>
         <script src="./todo/task/todo-task.component.js"></script>
+        <script src="./todo/newTask/todo-new-task.component.js"></script>
         <script src="./todo/meetings/todo-meetings.component.js"></script>
         <script src="./todo/controls/todo-controls.component.js"></script>
         <script src="./todo/header/todo-header.component.js"></script>

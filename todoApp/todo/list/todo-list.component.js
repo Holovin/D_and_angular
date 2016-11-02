@@ -57,8 +57,8 @@
       vm.onClearLocalStorage();
     }
 
-    function addItem() {
-      vm.onAddItem();
+    function addItem(taskItem) {
+      vm.onAddItem({taskItem: taskItem});
     }
 
     function removeItem(taskItem) {

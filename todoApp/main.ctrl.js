@@ -49,8 +49,8 @@
       _updateLocalStorageState(false);
     }
 
-    function addItem() {
-      todoStorageService.addEmptyItem();
+    function addItem(taskItem) {
+      todoStorageService.addItem(taskItem);
     }
 
     function removeItem(taskItem) {
@@ -59,14 +59,28 @@
 
 
     function _updateLocalStorageState(state) {
-      vm.lsExist = state;
+      if (_.isBoolean(state)) {
+        vm.lsExist = state;
+        return;
+      }
+
+      vm.lsExist = todoStorageService.checkLS();
+    }
+
+    function _updateTodoStorage(todo) {
+      if (_.isObject(todo)) {
+        vm.todo = todo;
+        return;
+      }
+
+      vm.todo = todoStorageService.getData();
     }
 
     function _grabDataFromService() {
-      vm.todo = todoStorageService.getData();
+      _updateTodoStorage();
       vm.user = todoStorageService.getUser();
       vm.meetings = todoStorageService.getMeetings();
-      _updateLocalStorageState(todoStorageService.checkLS());
+      _updateLocalStorageState();
     }
 
     function _setDataService() {
