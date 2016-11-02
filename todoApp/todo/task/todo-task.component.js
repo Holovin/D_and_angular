@@ -19,6 +19,7 @@
     vm.$onInit = init;
     vm.$onChanges = updateLocalInput;
     vm.edit = edit;
+    vm.toggleStatus = toggleStatus;
     vm.removeItem = removeItem;
 
     function init() {
@@ -42,6 +43,12 @@
       }
 
       vm.canEdit = !vm.canEdit;
+    }
+
+    function toggleStatus() {
+      if (!vm.canEdit) {
+        vm.taskLocal.status = !vm.taskLocal.status;
+      }
     }
 
     function removeItem() {

@@ -10,7 +10,7 @@
                         </span>
 
                         <input class="form-control" ng-readonly="!vm.canEdit" complete="vm.taskLocal.status"
-                               type="text" ng-model="vm.taskLocal.name">
+                               type="text" ng-model="vm.taskLocal.name" ng-click="vm.toggleStatus()">
 
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="vm.edit()" ng-class="{active: vm.canEdit}">
