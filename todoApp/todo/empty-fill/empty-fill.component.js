@@ -7,7 +7,8 @@
       templateUrl: './todo/empty-fill/empty-fill.template.html',
       controllerAs: 'vm',
       bindings: {
-        list: '<'
+        list: '<',
+        text: '@'
       }
     });
 

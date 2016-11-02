@@ -7,7 +7,7 @@
 <todo-task ng-repeat="item in vm.list | orderBy: vm.propertyName : vm.reverseFlag | filter: vm.filter : vm.filterStrictFlag"
         task="item" on-remove-item="vm.removeItem(taskItem)"></todo-task>
 
-<empty-fill list="vm.list"></empty-fill>
+<empty-fill list="vm.list" text="Your todo list is empty"></empty-fill>
 
 <todo-new-task on-add-item="vm.addItem(taskItem)"></todo-new-task>
 
