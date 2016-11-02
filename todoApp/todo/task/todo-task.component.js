@@ -45,9 +45,7 @@
     }
 
     function removeItem() {
-      vm.onRemoveItem({
-        taskItem: vm.task
-      })
+      vm.onRemoveItem({taskItem: vm.task});
     }
   }
 
