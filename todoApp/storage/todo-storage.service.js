@@ -69,8 +69,6 @@
     }
 
     function loadHttp() {
-
-
       return _getUsers('data/users.json')
         .then(function (res) {
           return _getUserList(res);
@@ -84,7 +82,7 @@
           _lsExist = _checkLS();
         })
 
-        .catch(function a(err) {
+        .catch(function (err) {
           console.log("Fatality error (promise win): ", err);
         })
     }
