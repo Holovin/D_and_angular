@@ -1,6 +1,8 @@
 (function () {
   'use strict';
 
-  angular.module('storage', []);
+  angular.module('storage', [
+    'dataProvider'
+  ]);
 
 })();
