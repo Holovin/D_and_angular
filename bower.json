@@ -1,0 +1,21 @@
+{
+  "name": "D_and_angular",
+  "description": "Simple todo list",
+  "main": "todoApp/main.js",
+  "authors": [
+    "Alexander Holovin"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7"
+  }
+}

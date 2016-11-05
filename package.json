@@ -1,0 +1,27 @@
+{
+  "name": "d_and_angular",
+  "version": "1.0.0",
+  "description": "Simple todo list",
+  "main": "todoApp/main.js",
+  "dependencies": {},
+  "devDependencies": {
+    "bower": "^1.7.9",
+    "gulp": "^3.9.1",
+    "gulp-angular-filesort": "^1.1.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-inject": "^4.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Holovin/D_and_angular.git"
+  },
+  "author": "Alexander Holovin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Holovin/D_and_angular/issues"
+  },
+  "homepage": "https://github.com/Holovin/D_and_angular#readme"
+}
