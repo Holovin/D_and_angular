@@ -5,6 +5,7 @@ var merge = require('deepmerge');
 var del = require('del');
 var path = require('path');
 
+var clean = require('gulp-clean');
 var concat = require('gulp-concat');
 var order = require("gulp-order");
 var bowerFiles = require('main-bower-files');
@@ -89,9 +90,13 @@ gulp.task('styles-app', function () {
 });
 
 gulp.task('clean', function () {
-  del([path.join(paths.build, '/**'), path.join('!', paths.build)]).then(function (paths) {
-    console.log('Deleted files and folders:\n', paths.join('\n'));
-  });
+  return gulp.src(paths.build, {read: false})
+    .pipe(clean());
+});
+
+gulp.task('copy', function () { gulp
+  .src()
+  .pipe(gulp.dest('dist'));
 });
 
 gulp.task('set-dev-node-env', function () {
