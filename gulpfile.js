@@ -94,11 +94,11 @@ gulp.task('clean', function () {
   });
 });
 
-gulp.task('set-dev-node-env', function() {
+gulp.task('set-dev-node-env', function () {
   return process.env.NODE_ENV = env.development;
 });
 
-gulp.task('set-prod-node-env', function() {
+gulp.task('set-prod-node-env', function () {
   return process.env.NODE_ENV = env.production;
 });
 
