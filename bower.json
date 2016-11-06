@@ -34,11 +34,21 @@
       "main": {
         "development": [
           "./dist/js/bootstrap.js",
-          "./dist/css/bootstrap.css"
+          "./dist/css/bootstrap.css",
+          "./fonts/glyphicons-halflings-regular.eot",
+          "./fonts/glyphicons-halflings-regular.svg",
+          "./fonts/glyphicons-halflings-regular.ttf",
+          "./fonts/glyphicons-halflings-regular.woff",
+          "./fonts/glyphicons-halflings-regular.woff2"
         ],
         "production": [
           "./dist/js/bootstrap.min.js",
-          "./dist/css/bootstrap.min.css"
+          "./dist/css/bootstrap.min.css",
+          "./fonts/glyphicons-halflings-regular.eot",
+          "./fonts/glyphicons-halflings-regular.svg",
+          "./fonts/glyphicons-halflings-regular.ttf",
+          "./fonts/glyphicons-halflings-regular.woff",
+          "./fonts/glyphicons-halflings-regular.woff2"
         ]
       }
     },
@@ -49,6 +59,16 @@
         ],
         "production": [
           "./dist/jquery.min.js"
+        ]
+      }
+    },
+    "lodash": {
+      "main": {
+        "development": [
+          "./dist/lodash.js"
+        ],
+        "production": [
+          "./dist/lodash.min.js"
         ]
       }
     }

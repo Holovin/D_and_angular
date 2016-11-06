@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var runSequence = require('run-sequence');
+var argv = require('yargs').argv;
 
 var merge = require('deepmerge');
 var del = require('del');
@@ -37,9 +38,10 @@ var paths = {
 
 gulp.task('default', ['clean']);
 
-gulp.task('do', ['clean', 'set-dev-node-env'], function () {
+gulp.task('do', ['clean'], function () {
   runSequence(
-    ['styles-app', 'styles-vendor', 'scripts-app', 'scripts-vendor'],
+    ['copy-data', 'set-dev-node-env'],
+    ['copy-fonts', 'styles-app', 'styles-vendor', 'scripts-app', 'scripts-vendor'],
     ['scripts-inject']);
 });
 
@@ -94,9 +96,18 @@ gulp.task('clean', function () {
     .pipe(clean());
 });
 
-gulp.task('copy', function () { gulp
-  .src()
-  .pipe(gulp.dest('dist'));
+gulp.task('copy-fonts', function () {
+  checkEnv();
+
+  return gulp.src(bowerFiles('**/fonts/*'))
+    .pipe(debug())
+    .pipe(gulp.dest(path.join(paths.build, 'fonts')));
+});
+
+gulp.task('copy-data', function () {
+  gulp
+    .src(path.join(paths.app, paths.dataDir, '**/*.json'))
+    .pipe(gulp.dest(path.join(paths.build, paths.dataDir)));
 });
 
 gulp.task('set-dev-node-env', function () {
@@ -133,6 +144,17 @@ gulp.task('scripts-inject', function () {
 });
 
 function checkEnv() {
+  if (argv.env) {
+    process.env.NODE_ENV = argv.env;
+
+    // shortcuts
+  } else if (argv.D) {
+    process.env.NODE_ENV = env.development;
+
+  } else if (argv.P) {
+    process.env.NODE_ENV = env.production;
+  }
+
   if (!process.env.NODE_ENV in env || !process.env.NODE_ENV) {
     throw new Error(`Bad environment value (${process.env.NODE_ENV})`);
   }
