@@ -4,6 +4,7 @@ var del = require('del');
 var path = require('path');
 
 var concat = require('gulp-concat');
+var order = require("gulp-order");
 var bowerFiles = require('main-bower-files');
 
 
@@ -16,8 +17,14 @@ gulp.task('scripts-vendor', function() {
   var filter = process.env.NODE_ENV === 'development' ? '**/*.js' : '**/*.min.js';
 
   return gulp.src(bowerFiles(filter))
+    .pipe(order([
+      // TODO: use minimatch or smthng
+      '**/jquery.min.js',
+      '**/jquery.js',
+      '**/*'
+    ]))
     .pipe(concat('vendor.js'))
-    .pipe(gulp.dest('./build'));
+    .pipe(gulp.dest(paths.build));
 });
 
 gulp.task('default', ['clean', 'set-prod-node-env', 'scripts-vendor']);
