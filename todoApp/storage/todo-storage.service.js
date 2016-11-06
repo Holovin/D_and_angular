@@ -69,7 +69,7 @@
     }
 
     function loadHttp() {
-      return _getUsers('data/users.json')
+      return _getUsers('./data/users.json')
         .then(function (res) {
           return _getUserList(res);
         })
