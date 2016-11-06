@@ -61,8 +61,8 @@ gulp.task('scripts-app', function () {
 
   return sources
     .pipe(concat(paths.appConcatFileJS))
-    .pipe(uglify())
-    .pipe(gulp.dest(paths.build));
+    .pipe(gulpif(process.env.NODE_ENV === env.production, uglify()))
+    .pipe(gulp.dest(path.join(paths.build, paths.jsDir)));
 });
 
 gulp.task('styles-app', function () {
@@ -71,9 +71,9 @@ gulp.task('styles-app', function () {
   var sources = gulp.src(path.join(paths.app, '**/*.css'));
 
   return sources
-    .pipe(gulpif(process.env.NODE_ENV === env.production), cleanCSS())
     .pipe(concat(paths.appConcatFileCSS))
-    .pipe(gulp.dest(paths.build));
+    .pipe(gulpif(process.env.NODE_ENV === env.production, cleanCSS()))
+    .pipe(gulp.dest(path.join(paths.build, paths.cssDir)));
 });
 
 gulp.task('clean', function () {
@@ -92,7 +92,7 @@ gulp.task('set-prod-node-env', function() {
 
 
 function checkEnv() {
-  if (process.env.NODE_ENV in env || !process.env.NODE_ENV) {
+  if (!process.env.NODE_ENV in env || !process.env.NODE_ENV) {
     throw new Error(`Bad environment value (${process.env.NODE_ENV})`);
   }
 }
