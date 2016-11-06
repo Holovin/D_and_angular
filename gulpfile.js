@@ -43,7 +43,7 @@ gulp.task('do', ['clean', 'set-dev-node-env'], function () {
     ['scripts-inject']);
 });
 
-gulp.task('scripts-vendor', function() {
+gulp.task('scripts-vendor', function () {
   checkEnv();
 
   var filter = process.env.NODE_ENV === env.development ? '**/*.js' : '**/*.min.js';
@@ -59,7 +59,7 @@ gulp.task('scripts-vendor', function() {
     .pipe(gulp.dest(path.join(paths.build, paths.jsDir)));
 });
 
-gulp.task('styles-vendor', function() {
+gulp.task('styles-vendor', function () {
   checkEnv();
 
   return gulp.src(bowerFiles('**/*.css'))
