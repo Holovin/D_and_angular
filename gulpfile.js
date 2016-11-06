@@ -1,11 +1,13 @@
 var gulp = require('gulp');
 
+var merge = require('deepmerge');
 var del = require('del');
 var path = require('path');
 
 var concat = require('gulp-concat');
 var order = require("gulp-order");
 var bowerFiles = require('main-bower-files');
+var inject = require('gulp-inject');
 var uglify = require('gulp-uglify');
 var cleanCSS = require('gulp-clean-css');
 var gulpif = require('gulp-if');
@@ -19,8 +21,11 @@ var paths = {
   app: './todoApp',
   build: './build',
 
-  js: 'js',
-  css: 'css',
+  jsDir: 'js',
+  cssDir: 'css',
+
+  vendorCSS: 'vendor.css',
+  vendorJS: 'vendor.js',
 
   entryPoint: 'index.html',
   appConcatFileJS: 'app.js',
@@ -42,19 +47,19 @@ gulp.task('scripts-vendor', ['set-dev-node-env'], function() {
       '**/jquery.js',
       '**/*'
     ]))
-    .pipe(concat('vendor.js'))
-    .pipe(gulp.dest(path.join(paths.build, paths.js)));
+    .pipe(concat(paths.vendorJS))
+    .pipe(gulp.dest(path.join(paths.build, paths.jsDir)));
 });
 
 gulp.task('styles-vendor', function() {
   checkEnv();
 
   return gulp.src(bowerFiles('**/*.css'))
-    .pipe(concat('vendor.css'))
-    .pipe(gulp.dest(path.join(paths.build, paths.css)));
+    .pipe(concat(paths.vendorCSS))
+    .pipe(gulp.dest(path.join(paths.build, paths.cssDir)));
 });
 
-gulp.task('scripts-app', function () {
+gulp.task('scripts-app', ['set-dev-node-env'], function () {
   checkEnv();
 
   var sources = gulp.src(path.join(paths.app, '**/*.js'));
@@ -90,6 +95,30 @@ gulp.task('set-prod-node-env', function() {
   return process.env.NODE_ENV = env.production;
 });
 
+gulp.task('scripts-inject', function () {
+  var options = {
+    ignorePath: '/build/',
+    removeTags: true,
+    relative: true
+  };
+
+  var source = gulp.src(path.join(paths.app, paths.entryPoint));
+
+  var headFiles = gulp.src([
+    path.join(paths.build, paths.jsDir, paths.vendorJS),
+    path.join(paths.build, paths.cssDir, paths.vendorCSS),
+    path.join(paths.build, paths.cssDir, paths.appConcatFileCSS)
+  ], {read: false});
+
+  var bodyFiles = gulp.src([
+    path.join(paths.build, paths.jsDir, paths.appConcatFileJS)
+  ], {read: false});
+
+  return source
+    .pipe(inject(headFiles, merge(options, {name: 'head'})))
+    .pipe(inject(bodyFiles, merge(options, {name: 'body'})))
+    .pipe(gulp.dest(paths.build));
+});
 
 function checkEnv() {
   if (!process.env.NODE_ENV in env || !process.env.NODE_ENV) {
