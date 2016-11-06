@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var runSequence = require('run-sequence');
 
 var merge = require('deepmerge');
 var del = require('del');
@@ -35,7 +36,13 @@ var paths = {
 
 gulp.task('default', ['clean']);
 
-gulp.task('scripts-vendor', ['set-dev-node-env'], function() {
+gulp.task('do', ['clean', 'set-dev-node-env'], function () {
+  runSequence(
+    ['styles-app', 'styles-vendor', 'scripts-app', 'scripts-vendor'],
+    ['scripts-inject']);
+});
+
+gulp.task('scripts-vendor', function() {
   checkEnv();
 
   var filter = process.env.NODE_ENV === env.development ? '**/*.js' : '**/*.min.js';
@@ -59,7 +66,7 @@ gulp.task('styles-vendor', function() {
     .pipe(gulp.dest(path.join(paths.build, paths.cssDir)));
 });
 
-gulp.task('scripts-app', ['set-dev-node-env'], function () {
+gulp.task('scripts-app', function () {
   checkEnv();
 
   var sources = gulp.src(path.join(paths.app, '**/*.js'));
