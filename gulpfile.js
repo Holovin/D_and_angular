@@ -1,4 +1,4 @@
-var gulp = require('gulp');
+var gulp = require('gulp-help')(require('gulp'), {hideDepsMessage: true});
 
 var angularTemplateCache = require('gulp-angular-templatecache');
 var argv = require('yargs').argv;
@@ -25,6 +25,8 @@ var env = {
 
 var paths = {
   app: './todoApp',
+  appDir: 'todoApp',
+
   build: './build',
 
   jsDir: 'js',
@@ -38,36 +40,99 @@ var paths = {
   entryPointJS: 'main.js',
 
   appConcatFileJS: 'app.js',
-  appConcatFileCSS: 'app.css'
+  appConcatFileCSS: 'app.css',
+
+  templatesJS: 'templates.js'
 };
 
+var tasks = {
+  checkEnv: {
+    name: 'check-env',
+    desc: false
+  },
 
-gulp.task('default', ['help']);
+  build: {
+    name: 'do',
+    desc: 'Build project'
+  },
 
-gulp.task('help', function () {
-  return console.log("\n\n\n\t\t\tHey!\n\n\n");
-});
+  web: {
+    name: 'web',
+    desc: 'Run local server with app'
+  },
 
-gulp.task('web', function() {
+  clean: {
+    name: 'clean',
+    desc: 'Clean build path'
+  },
+
+  scriptsVendor: {
+    name: 'scripts-vendor',
+    desc: 'Concat and minify vendor js files'
+  },
+
+  stylesVendor: {
+    name: 'styles-vendor',
+    desc: 'Concat and minify vendor css files'
+  },
+
+  scriptsApp: {
+    name: 'scripts-app',
+    desc: 'Concat and minify app js files'
+  },
+
+  stylesApp: {
+    name: 'styles-app',
+    desc: 'Concat and minify app css files'
+  },
+
+  scriptsInject: {
+    name: 'scripts-inject',
+    desc: 'Inject js and css files into main app.html file'
+  },
+
+  copyFonts: {
+    name: 'copy-fonts',
+    desc: 'Copy bower fonts to build folder'
+  },
+
+  copyData: {
+    name: 'copy-data',
+    desc: 'Copy data (.json) files to build folder'
+  }
+};
+
+var helpOpt = {
+  options: {
+    'env=ENV': 'set environment value before running',
+    'D': '...with development environment',
+    'P': '...with production environment'
+  }
+};
+
+gulp.task('default', false, ['help']);
+
+gulp.task(tasks.web.name, tasks.web.desc, function() {
   connect.server({
     name: 'Dist App',
-    root: 'build',
+    root: paths.build,
     port: 8001,
     livereload: true
   });
 });
 
-gulp.task('do', ['clean'], function () {
-  runSequence(
-    ['copy-data', 'set-dev-node-env'],
-    ['copy-fonts', 'styles-app', 'styles-vendor', 'scripts-app', 'scripts-vendor'],
-    ['scripts-inject']
+gulp.task(tasks.build.name, tasks.build.desc, [tasks.clean.name, tasks.checkEnv.name], function () {
+  runSequence([
+    tasks.copyData.name, tasks.copyFonts.name,
+    tasks.stylesApp.name, tasks.scriptsApp.name,
+    tasks.scriptsVendor.name, tasks.stylesVendor.name
+  ], [
+    tasks.scriptsInject.name
+    ]
   );
-});
+}, helpOpt);
 
-gulp.task('scripts-vendor', function () {
-  checkEnv();
-
+gulp.task(tasks.scriptsVendor.name, tasks.scriptsVendor.desc, [tasks.checkEnv.name], function () {
   var filter = process.env.NODE_ENV === env.development ? '**/*.js' : '**/*.min.js';
 
   return gulp.src(bowerFiles(filter))
@@ -81,17 +146,13 @@ gulp.task('scripts-vendor', function () {
     .pipe(gulp.dest(path.join(paths.build, paths.jsDir)));
 });
 
-gulp.task('styles-vendor', function () {
-  checkEnv();
-
+gulp.task(tasks.stylesVendor.name, tasks.stylesVendor.desc, [tasks.checkEnv.name], function () {
   return gulp.src(bowerFiles('**/*.css'))
     .pipe(concat(paths.vendorCSS))
     .pipe(gulp.dest(path.join(paths.build, paths.cssDir)));
 });
 
-gulp.task('scripts-app', function () {
-  checkEnv();
-
+gulp.task(tasks.scriptsApp.name, tasks.scriptsApp.desc, [tasks.checkEnv.name], function () {
   var sources = gulp.src(path.join(paths.app, '**/*.js'));
 
   var templates = gulp.src('**/*.template.html')
@@ -112,16 +173,14 @@ gulp.task('scripts-app', function () {
       '**/*.component.js',
       '**/*.directive.js',
       '**/*.ctrl.js',
-      'templates.js'
+      paths.templatesJS
     ]))
     .pipe(concat(paths.appConcatFileJS))
     .pipe(gulpif(process.env.NODE_ENV === env.production, uglify()))
     .pipe(gulp.dest(path.join(paths.build, paths.jsDir)));
 });
 
-gulp.task('styles-app', function () {
-  checkEnv();
-
+gulp.task(tasks.stylesApp.name, tasks.stylesApp.desc, [tasks.checkEnv.name], function () {
   var sources = gulp.src(path.join(paths.app, '**/*.css'));
 
   return sources
@@ -130,37 +189,26 @@ gulp.task('styles-app', function () {
     .pipe(gulp.dest(path.join(paths.build, paths.cssDir)));
 });
 
-gulp.task('clean', function () {
+gulp.task(tasks.clean.name, tasks.clean.desc, function () {
   return gulp.src(paths.build, {read: false})
     .pipe(clean());
 });
 
-gulp.task('copy-fonts', function () {
-  checkEnv();
-
+gulp.task(tasks.copyFonts.name, tasks.copyFonts.desc, [tasks.checkEnv.name], function () {
   return gulp.src(bowerFiles('**/fonts/*'))
     .pipe(gulp.dest(path.join(paths.build, 'fonts')));
 });
 
-gulp.task('copy-data', function () {
-  gulp
-    .src(path.join(paths.app, paths.dataDir, '**/*.json'))
+gulp.task(tasks.copyData.name, tasks.copyData.desc, function () {
+  gulp.src(path.join(paths.app, paths.dataDir, '**/*.json'))
     .pipe(gulp.dest(path.join(paths.build, paths.dataDir)));
 });
 
-gulp.task('set-dev-node-env', function () {
-  return process.env.NODE_ENV = env.development;
-});
-
-gulp.task('set-prod-node-env', function () {
-  return process.env.NODE_ENV = env.production;
-});
-
-gulp.task('scripts-inject', function () {
+gulp.task(tasks.scriptsInject.name, tasks.scriptsInject.desc, function () {
   var options = {
     // FIXME: smells bad, feels terrible. Such bad, much evil
     addPrefix: '.',
-    ignorePath: '../build/',
+    ignorePath: '.' + paths.build,
     removeTags: true,
     relative: true
   };
@@ -175,7 +223,7 @@ gulp.task('scripts-inject', function () {
 
   var bodyFiles = gulp.src([
     path.join(paths.build, paths.jsDir, paths.appConcatFileJS),
-    path.join(paths.build, paths.jsDir, 'templates.js')
+    path.join(paths.build, paths.jsDir, paths.templatesJS)
   ], {read: false});
 
   return source
@@ -184,7 +232,7 @@ gulp.task('scripts-inject', function () {
     .pipe(gulp.dest(paths.build));
 });
 
-function checkEnv() {
+gulp.task(tasks.checkEnv.name, tasks.checkEnv.desc, function (done) {
   if (argv.env) {
     process.env.NODE_ENV = argv.env;
 
@@ -197,6 +245,10 @@ function checkEnv() {
   }
 
   if (!process.env.NODE_ENV in env || !process.env.NODE_ENV) {
-    throw new Error(`Bad environment value (${process.env.NODE_ENV})`);
+    var e = new Error(`Bad environment value (${process.env.NODE_ENV}). Use -env=ENV, -D or -P flags for run this task.`);
+    e.showStack = false;
+    done(e);
   }
-}
+
+  done();
+});
