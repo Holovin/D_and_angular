@@ -13,9 +13,8 @@
     </head>
 
     <body>
-        <div class="container" ng-controller="MainCtrl as vm">
-            <h1 ng-hide="{{true}}">Angular error!</h1>
-            <div class="row" ng-cloak ng-switch on="vm.user.length">
+        <div class="container" ng-controller="MainCtrl as vm" ng-cloak ng-switch on="vm.user.length">
+            <div class="row">
                 <h1 ng-hide="vm.user">Loading...</h1>
 
                 <empty-fill ng-switch-when="0" text="Fatal error, no data received."></empty-fill>
