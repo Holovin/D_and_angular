@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Simple todo list",
   "main": "todoApp/main.js",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-connect": "^5.0.0"
+  },
   "devDependencies": {
     "bower": "^1.7.9",
     "deepmerge": "^1.2.0",
@@ -14,7 +16,6 @@
     "gulp-clean": "^0.3.2",
     "gulp-clean-css": "^2.0.13",
     "gulp-concat": "^2.6.0",
-    "gulp-connect": "^5.0.0",
     "gulp-help": "^1.6.1",
     "gulp-if": "^2.0.2",
     "gulp-inject": "^4.1.0",
