@@ -1,19 +1,22 @@
 var gulp = require('gulp');
-var runSequence = require('run-sequence');
+
+var angularTemplateCache = require('gulp-angular-templatecache');
 var argv = require('yargs').argv;
-
-var merge = require('deepmerge');
-var del = require('del');
-var path = require('path');
-
-var clean = require('gulp-clean');
-var concat = require('gulp-concat');
-var order = require("gulp-order");
 var bowerFiles = require('main-bower-files');
-var inject = require('gulp-inject');
-var uglify = require('gulp-uglify');
+var clean = require('gulp-clean');
 var cleanCSS = require('gulp-clean-css');
+var concat = require('gulp-concat');
+var connect = require('gulp-connect');
+var debug = require('gulp-debug');
+var es = require('event-stream');
+var inject = require('gulp-inject');
 var gulpif = require('gulp-if');
+var merge = require('deepmerge');
+var order = require("gulp-order");
+var path = require('path');
+var runSequence = require('run-sequence');
+var uglify = require('gulp-uglify');
+
 
 var env = {
   production: 'production',
@@ -26,23 +29,40 @@ var paths = {
 
   jsDir: 'js',
   cssDir: 'css',
+  dataDir: 'data',
 
   vendorCSS: 'vendor.css',
   vendorJS: 'vendor.js',
 
   entryPoint: 'index.html',
+  entryPointJS: 'main.js',
+
   appConcatFileJS: 'app.js',
   appConcatFileCSS: 'app.css'
 };
 
 
-gulp.task('default', ['clean']);
+gulp.task('default', ['help']);
+
+gulp.task('help', function () {
+  return console.log("\n\n\n\t\t\tHey!\n\n\n");
+});
+
+gulp.task('web', function() {
+  connect.server({
+    name: 'Dist App',
+    root: 'build',
+    port: 8001,
+    livereload: true
+  });
+});
 
 gulp.task('do', ['clean'], function () {
   runSequence(
     ['copy-data', 'set-dev-node-env'],
     ['copy-fonts', 'styles-app', 'styles-vendor', 'scripts-app', 'scripts-vendor'],
-    ['scripts-inject']);
+    ['scripts-inject']
+  );
 });
 
 gulp.task('scripts-vendor', function () {
@@ -74,7 +94,26 @@ gulp.task('scripts-app', function () {
 
   var sources = gulp.src(path.join(paths.app, '**/*.js'));
 
-  return sources
+  var templates = gulp.src('**/*.template.html')
+    .pipe(angularTemplateCache({
+      module: 'todoApp.ui',
+      standalone: false,
+      moduleSystem: 'IIFE',
+      transformUrl: function (url) {
+        return url.replace(/^todoApp\\/, '.\\');
+      }
+    }));
+
+  return es.merge(sources, templates)
+    .pipe(order([
+      '**/main.js',
+      '**/*.module.js',
+      '**/*.service.js',
+      '**/*.component.js',
+      '**/*.directive.js',
+      '**/*.ctrl.js',
+      'templates.js'
+    ]))
     .pipe(concat(paths.appConcatFileJS))
     .pipe(gulpif(process.env.NODE_ENV === env.production, uglify()))
     .pipe(gulp.dest(path.join(paths.build, paths.jsDir)));
@@ -100,7 +139,6 @@ gulp.task('copy-fonts', function () {
   checkEnv();
 
   return gulp.src(bowerFiles('**/fonts/*'))
-    .pipe(debug())
     .pipe(gulp.dest(path.join(paths.build, 'fonts')));
 });
 
@@ -120,7 +158,9 @@ gulp.task('set-prod-node-env', function () {
 
 gulp.task('scripts-inject', function () {
   var options = {
-    ignorePath: '/build/',
+    // FIXME: smells bad, feels terrible. Such bad, much evil
+    addPrefix: '.',
+    ignorePath: '../build/',
     removeTags: true,
     relative: true
   };
@@ -134,7 +174,8 @@ gulp.task('scripts-inject', function () {
   ], {read: false});
 
   var bodyFiles = gulp.src([
-    path.join(paths.build, paths.jsDir, paths.appConcatFileJS)
+    path.join(paths.build, paths.jsDir, paths.appConcatFileJS),
+    path.join(paths.build, paths.jsDir, 'templates.js')
   ], {read: false});
 
   return source
