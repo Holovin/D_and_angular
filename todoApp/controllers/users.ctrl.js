@@ -4,11 +4,11 @@
 
   angular
     .module('todoApp')
-    .controller('UsersCtrl', Users);
+    .controller('UsersCtrl', UsersCtrl);
 
-  Users.$inject = ['userStorageService', 'users', 'currentUser'];
+  UsersCtrl.$inject = ['userStorageService', 'users', 'currentUser'];
 
-  function Users(userStorageService, users, currentUser) {
+  function UsersCtrl(userStorageService, users, currentUser) {
     var vm = this;
 
     vm.$onInit = init;
