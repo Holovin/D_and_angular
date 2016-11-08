@@ -1,0 +1,37 @@
+* {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+input[readonly], input[type=checkbox] {
+    cursor: pointer;
+}
+
+input[readonly]:active,  input[readonly]:focus {
+    border-color: #ccc;
+    box-shadow: unset;
+
+    /* Prevent text select at double click */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.complete {
+    color: #999;
+    text-decoration: line-through;
+    text-decoration-color: #666;
+}

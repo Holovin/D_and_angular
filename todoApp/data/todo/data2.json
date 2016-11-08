@@ -1,0 +1,22 @@
+{
+  "todoList": [
+    {
+      "name": "Horosho",
+      "status": false
+    },
+    {
+      "name": "Juvet na svete",
+      "status": false
+    },
+    {
+      "name": "Winnee-poooshkkkkk",
+      "status": true
+    },
+    {
+      "name": "Need to gang bees",
+      "status": false
+    }
+  ],
+
+  "meetingsUrl": "data/meet/data2.json"
+}

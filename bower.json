@@ -1,0 +1,76 @@
+{
+  "name": "d-and-angular",
+  "description": "Simple todo list",
+  "main": "todoApp/main.js",
+  "authors": [
+    "Alexander Holovin"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.8",
+    "bootstrap": "^3.3.7",
+    "lodash": "^4.16.6"
+  },
+  "overrides": {
+    "angular": {
+      "main": {
+        "development": [
+          "./angular.js"
+        ],
+        "production": [
+          "./angular.min.js"
+        ]
+      }
+    },
+    "bootstrap": {
+      "main": {
+        "development": [
+          "./dist/js/bootstrap.js",
+          "./dist/css/bootstrap.css",
+          "./fonts/glyphicons-halflings-regular.eot",
+          "./fonts/glyphicons-halflings-regular.svg",
+          "./fonts/glyphicons-halflings-regular.ttf",
+          "./fonts/glyphicons-halflings-regular.woff",
+          "./fonts/glyphicons-halflings-regular.woff2"
+        ],
+        "production": [
+          "./dist/js/bootstrap.min.js",
+          "./dist/css/bootstrap.min.css",
+          "./fonts/glyphicons-halflings-regular.eot",
+          "./fonts/glyphicons-halflings-regular.svg",
+          "./fonts/glyphicons-halflings-regular.ttf",
+          "./fonts/glyphicons-halflings-regular.woff",
+          "./fonts/glyphicons-halflings-regular.woff2"
+        ]
+      }
+    },
+    "jquery": {
+      "main": {
+        "development": [
+          "./dist/jquery.js"
+        ],
+        "production": [
+          "./dist/jquery.min.js"
+        ]
+      }
+    },
+    "lodash": {
+      "main": {
+        "development": [
+          "./dist/lodash.js"
+        ],
+        "production": [
+          "./dist/lodash.min.js"
+        ]
+      }
+    }
+  }
+}

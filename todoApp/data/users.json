@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "name": "Pooshkeen",
+      "url": "./data/todo/data1.json"
+    },
+    {
+      "name": "Winnee-poooshkeeeen",
+      "url": "./data/todo/data2.json"
+    },
+    {
+      "name": "Freeman",
+      "url": "./data/todo/data3.json"
+    }
+  ]
+}

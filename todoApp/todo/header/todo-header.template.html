@@ -1,0 +1,40 @@
+<div class="row" ng-hide="vm.parent.list.length === 0">
+    <div class="col-md-10">
+        <div class="well">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Filter</span>
+                            <input class="form-control" type="text" placeholder="...by name"
+                                   ng-model="vm.filter.name" ng-change="vm.filterList(vm.filter)"/>
+                            <!--<span class="input-group-btn">-->
+                                <!--<button class="btn btn-primary pull-right"-->
+                                        <!--ng-click="vm.filterStrict()" ng-class="{active: vm.parent.filterStrictFlag}">-->
+                                    <!--Strict mode-->
+                                <!--</button>-->
+                            <!--</span>-->
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">Sort by</span>
+                            <select ng-model="vm.sortSelected" ng-options="x.displayName for x in vm.sortItems"
+                                    ng-change="vm.sortList(vm.sortSelected.sortField)" class="form-control"></select>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default"
+                                        ng-click="vm.sortReverse()" ng-class="{active: vm.parent.reverseFlag}">
+                                    Reverse
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+
+                    <br>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+{
+  "todoList": [
+    {
+      "name": "Burya mglou",
+      "status": false
+    },
+    {
+      "name": "Nebo kroet",
+      "status": true
+    },
+    {
+      "name": "Vihri snejnie krutya",
+      "status": true
+    }
+  ],
+
+  "meetingsUrl": "data/meet/data1.json"
+}

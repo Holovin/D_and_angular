@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html ng-app="todoApp">
+
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>D_and_angular</title>
+        <!-- head:css -->
+        <!-- endinject -->
+        <!-- head:js -->
+        <!-- endinject -->
+    </head>
+
+    <body>
+        <div class="container" ng-controller="MainCtrl as vm" ng-cloak ng-switch on="vm.user.length">
+            <div class="row">
+                <h1 ng-hide="vm.user">Loading...</h1>
+
+                <empty-fill ng-switch-when="0" text="Fatal error, no data received."></empty-fill>
+
+                <div class="col-md-10" ng-switch-default>
+                    <h1>Hi, {{ vm.user.name }}</h1>
+                    <hr>
+                    <todo-list list="vm.todo" ls-exist="vm.lsExist" on-refresh="vm.refresh()"
+                               on-load-local-storage="vm.loadLS()" on-clear-local-storage="vm.clearLS()"
+                               on-save-local-storage="vm.saveLS()" on-remove-item="vm.removeItem(taskItem)"
+                               on-add-item="vm.addItem(taskItem)"></todo-list>
+                    <hr>
+                    <todo-meetings meetings="vm.meetings"></todo-meetings>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="row">
+                <div class="col-md-10">
+                <small>
+                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                    Source code at <a href="https://github.com/Holovin/D_and_angular">GitHub</a>.
+                    Also see my other projects at <a href="https://bitbucket.org/DJ_miXxXer">BitBucket</a>.
+                </small>
+                <br><br>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- body:js -->
+        <!-- endinject -->
+    </body>
+
+</html>
