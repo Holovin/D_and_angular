@@ -56,6 +56,11 @@ var tasks = {
     desc: false
   },
 
+  all: {
+    name: 'all',
+    desc: 'Build and run (do + web)'
+  },
+
   build: {
     name: 'do',
     desc: 'Build project'
@@ -117,9 +122,14 @@ var helpOpt = {
 
 gulp.task('default', false, ['help']);
 
+gulp.task(tasks.all.name, tasks.all.desc, [tasks.checkEnv.name], function () {
+  runSequence([tasks.build.name],
+    [tasks.web.name])
+}, merge(helpOpt, {aliases: ['ez']}));
+
 gulp.task(tasks.web.name, tasks.web.desc, function() {
   connect.server({
-    name: 'Dist App',
+    name: 'TodoApp',
     root: paths.build,
     port: 8001,
     livereload: true
