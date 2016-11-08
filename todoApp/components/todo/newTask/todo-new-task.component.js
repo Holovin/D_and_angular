@@ -4,7 +4,7 @@
   angular
     .module('todoApp.ui')
     .component('todoNewTask', {
-      templateUrl: './todo/newTask/todo-new-task.template.html',
+      templateUrl: './components/todo/newTask/todo-new-task.template.html',
       controller: TodoNewTaskController,
       controllerAs: 'vm',
       bindings: {

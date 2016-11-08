@@ -1,0 +1,28 @@
+<div class="tab-content">
+    <div class="row">
+        <div class="col-md-10">
+            <div class="page-header">
+                <h1>Users</h1>
+            </div>
+
+            <div class="btn-group" role="group">
+                <button type="button" ng-repeat="user in vm.users" class="btn btn-default" ng-class="{'active': vm.isActive(user)}"
+                        ng-click="vm.select(user)">{{user.name}}</button>
+            </div>
+
+            <hr>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">User info</h3>
+                </div>
+                <div class="panel-body">
+                    User name: {{vm.currentUser.name}} <br>
+                    User todo url: {{vm.currentUser.todo}} <br>
+                    User meetings url: {{vm.currentUser.meetings}} <br>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

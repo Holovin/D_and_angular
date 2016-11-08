@@ -42,13 +42,23 @@ var paths = {
   appConcatFileJS: 'app.js',
   appConcatFileCSS: 'app.css',
 
-  templatesJS: 'templates.js'
+  templatesJS: 'templates.js',
+
+  uiRouter: {
+    production: './node_modules/angular-ui-router/release/angular-ui-router.js',
+    development:  './node_modules/angular-ui-router/release/angular-ui-router.min.js'
+  }
 };
 
 var tasks = {
   checkEnv: {
     name: 'check-env',
     desc: false
+  },
+
+  all: {
+    name: 'all',
+    desc: 'Build and run (do + web)'
   },
 
   build: {
@@ -112,9 +122,14 @@ var helpOpt = {
 
 gulp.task('default', false, ['help']);
 
+gulp.task(tasks.all.name, tasks.all.desc, [tasks.checkEnv.name], function () {
+  runSequence([tasks.build.name],
+    [tasks.web.name])
+}, merge(helpOpt, {aliases: ['ez']}));
+
 gulp.task(tasks.web.name, tasks.web.desc, function() {
   connect.server({
-    name: 'Dist App',
+    name: 'TodoApp',
     root: paths.build,
     port: 8001,
     livereload: true
@@ -133,13 +148,28 @@ gulp.task(tasks.build.name, tasks.build.desc, [tasks.clean.name, tasks.checkEnv.
 }, helpOpt);
 
 gulp.task(tasks.scriptsVendor.name, tasks.scriptsVendor.desc, [tasks.checkEnv.name], function () {
-  var filter = process.env.NODE_ENV === env.development ? '**/*.js' : '**/*.min.js';
+  var filter;
+  var router;
 
-  return gulp.src(bowerFiles(filter))
+  if (process.env.NODE_ENV === env.development) {
+    filter = '**/*.js';
+    router = paths.uiRouter.development;
+
+  } else {
+    filter = '**/*.min.js';
+    router = paths.uiRouter.production;
+  }
+
+  router = gulp.src(router);
+  var bower = gulp.src(bowerFiles(filter));
+
+  return es.merge(bower, router)
     .pipe(order([
       // TODO: use minimatch or smthng
       '**/jquery.min.js',
       '**/jquery.js',
+      '**/angular.min.js',
+      '**/angular.js',
       '**/*'
     ]))
     .pipe(concat(paths.vendorJS))

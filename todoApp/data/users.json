@@ -2,15 +2,18 @@
   "users": [
     {
       "name": "Pooshkeen",
-      "url": "./data/todo/data1.json"
+      "todo": "./data/todo/data1.json",
+      "meetings": "./data/meetings/data1.json"
     },
     {
       "name": "Winnee-poooshkeeeen",
-      "url": "./data/todo/data2.json"
+      "todo": "./data/todo/data2.json",
+      "meetings": "./data/meetings/data2.json"
     },
     {
       "name": "Freeman",
-      "url": "./data/todo/data3.json"
+      "todo": "./data/todo/data3.json",
+      "meetings": "./data/meetings/data3.json"
     }
   ]
 }

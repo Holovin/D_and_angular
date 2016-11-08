@@ -1,13 +1,14 @@
 (function () {
+
   'use strict';
 
   angular
     .module('todoApp')
-    .controller('MainCtrl', MainCtrl);
+    .controller('TodoCtrl', TodoCtrl);
 
-  MainCtrl.$inject = ['todoStorageService'];
+  TodoCtrl.$inject = ['todoStorageService', 'owner', 'todo'];
 
-  function MainCtrl(todoStorageService) {
+  function TodoCtrl(todoStorageService, owner, todo) {
     var vm = this;
 
     vm.$onInit = init;
@@ -18,17 +19,13 @@
     vm.addItem = addItem;
     vm.removeItem = removeItem;
 
-    function init() {
-      vm.todo = [];
-      vm.user = [];
-      vm.meetings = [];
-      vm.lsExist = false;
 
-      refresh();
+    function init() {
+      _grabDataFromService();
     }
 
     function refresh() {
-      todoStorageService.loadHttp().then(function () {
+      todoStorageService.loadTodo(vm.owner, true).then(function () {
         _grabDataFromService();
       });
     }
@@ -73,18 +70,18 @@
         return;
       }
 
-      vm.todo = todoStorageService.getData();
+      vm.todo = todoStorageService.getTodo();
     }
 
     function _grabDataFromService() {
       _updateTodoStorage();
-      vm.user = todoStorageService.getUser();
-      vm.meetings = todoStorageService.getMeetings();
+      vm.owner = todoStorageService.getOwner();
+
       _updateLocalStorageState();
     }
 
     function _setDataService() {
-      todoStorageService.setData(vm.todo);
+      todoStorageService.setTodo(vm.todo);
     }
   }
 
