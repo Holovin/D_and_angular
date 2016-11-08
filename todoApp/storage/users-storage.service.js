@@ -3,11 +3,11 @@
 
   angular
     .module('storage')
-    .factory('userStorageService', UserStorageService);
+    .factory('usersStorageService', UsersStorageService);
 
-  UserStorageService.$inject = ['networkService'];
+  UsersStorageService.$inject = ['networkService', '$q'];
 
-  function UserStorageService(networkService) {
+  function UsersStorageService(networkService, $q) {
     var _users = [];
     var _currentUser;
 
@@ -38,7 +38,11 @@
 
     function loadUsers() {
       if (_users.length) {
-        return _users;
+        var defer = $q.defer();
+
+        defer.resolve(_users);
+
+        return defer.promise;
       }
 
       return _getUsers('./data/users.json')

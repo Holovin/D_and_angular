@@ -6,7 +6,7 @@
     .module('todoApp')
     .controller('UsersCtrl', UsersCtrl);
 
-  UsersCtrl.$inject = ['userStorageService', 'users', 'currentUser'];
+  UsersCtrl.$inject = ['usersStorageService', 'users', 'currentUser'];
 
   function UsersCtrl(userStorageService, users, currentUser) {
     var vm = this;

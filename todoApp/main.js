@@ -31,11 +31,11 @@
           controllerAs: 'vm',
           template: '<users users="vm.users" current-user="vm.currentUser" on-select="vm.select(user)"></users>',
           resolve: {
-            users: ['userStorageService', function (userStorageService) {
-              return userStorageService.loadUsers();
+            users: ['usersStorageService', function (usersStorageService) {
+              return usersStorageService.loadUsers();
             }],
-            currentUser: ['users', 'userStorageService', function (users, userStorageService) {
-              return userStorageService.getCurrentUser();
+            currentUser: ['users', 'usersStorageService', function (users, usersStorageService) {
+              return usersStorageService.getCurrentUser();
             }]
           }
         },
