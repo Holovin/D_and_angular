@@ -6,14 +6,15 @@
     .module('todoApp')
     .controller('MeetingsCtrl', MeetingsCtrl);
 
-  MeetingsCtrl.$inject = ['meetings'];
+  MeetingsCtrl.$inject = ['owner', 'meetings'];
 
-  function MeetingsCtrl(meetings) {
+  function MeetingsCtrl(owner, meetings) {
     var vm = this;
 
     vm.$onInit = init;
 
     function init() {
+      vm.owner = owner;
       vm.meetings = meetings;
     }
   }

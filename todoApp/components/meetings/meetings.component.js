@@ -7,6 +7,7 @@
       templateUrl: './components/meetings/meetings.template.html',
       controllerAs: 'vm',
       bindings: {
+        owner: '<',
         meetings: '<'
       }
     });

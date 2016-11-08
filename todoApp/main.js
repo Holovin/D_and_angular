@@ -53,19 +53,33 @@
           url: 'meetings',
           controller: 'MeetingsCtrl',
           controllerAs: 'vm',
-          template: '<meetings meetings="vm.meetings"></meetings>',
+          template: '<meetings meetings="vm.meetings" owner="vm.owner"></meetings>',
           resolve: {
-            meetings: function () {
-              return [
-                {
-                  name: '123'
-                }, {
-                  name: '456'
-                }, {
-                  name: '567'
-                }
-              ];
-            }
+            owner: ['usersStorageService', function (usersStorageService) {
+              return usersStorageService.getCurrentUser();
+            }],
+
+            checkUser: ['$timeout', '$state', '$q', 'owner', function ($timeout, $state, $q, owner) {
+              var defer = $q.defer();
+
+              if (owner) {
+                defer.resolve(owner);
+              } else {
+
+                $timeout(function () {
+                  console.log("Access denied", owner);
+                  $state.go('app.users');
+                });
+
+                defer.reject();
+              }
+
+              return defer.promise;
+            }],
+
+            meetings: ['meetingsStorageService', 'checkUser', function (meetingsStorageService, checkUser) {
+              return meetingsStorageService.loadMeetings(checkUser);
+            }]
           }
         }
       ];
