@@ -49,11 +49,22 @@
           }
         },
         {
-          name: 'app.meets',
-          url: 'meets',
-          views: {
-            'content@app': {
-              template: '<todo-meetings></todo-meetings>'
+          name: 'app.meetings',
+          url: 'meetings',
+          controller: 'MeetingsCtrl',
+          controllerAs: 'vm',
+          template: '<meetings meetings="vm.meetings"></meetings>',
+          resolve: {
+            meetings: function () {
+              return [
+                {
+                  name: '123'
+                }, {
+                  name: '456'
+                }, {
+                  name: '567'
+                }
+              ];
             }
           }
         }

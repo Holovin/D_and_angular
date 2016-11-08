@@ -3,8 +3,8 @@
 
   angular
     .module('todoApp.ui')
-    .component('todoMeetings', {
-      templateUrl: './todo/meetings/todo-meetings.template.html',
+    .component('meetings', {
+      templateUrl: './components/meetings/meetings.template.html',
       controllerAs: 'vm',
       bindings: {
         meetings: '<'

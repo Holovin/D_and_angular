@@ -22,8 +22,8 @@
         name: 'Todo',
         state: 'app.todo'
       }, {
-        name: 'Meets',
-        state: 'app.meets'
+        name: 'Meetings',
+        state: 'app.meetings'
       }];
     }
   }
