@@ -84,6 +84,7 @@
 
       return  _getUserList(owner.todo)
         .then(function (res) {
+          _lsExist = _checkLS();
           _todo = res.todoList;
           return _todo;
         })

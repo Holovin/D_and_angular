@@ -21,9 +21,7 @@
 
 
     function init() {
-      vm.owner = owner;
-      vm.todo = todo;
-      vm.lsExist = false;
+      _grabDataFromService();
     }
 
     function refresh() {
