@@ -27,10 +27,9 @@
     }
 
     function refresh() {
-      // /// FIXME
-      // todoStorageService.loadHttp().then(function () {
-      //   _grabDataFromService();
-      // });
+      todoStorageService.loadTodo(vm.owner, true).then(function () {
+        _grabDataFromService();
+      });
     }
 
     function loadLS() {

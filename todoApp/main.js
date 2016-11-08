@@ -72,7 +72,7 @@
             }],
 
             todo: ['todoStorageService', 'checkUser', function (todoStorageService, checkUser) {
-               return todoStorageService.loadTodo(checkUser);
+               return todoStorageService.loadTodo(checkUser, false);
             }]
           }
         },

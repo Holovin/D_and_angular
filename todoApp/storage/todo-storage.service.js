@@ -71,8 +71,8 @@
       }
     }
 
-    function loadTodo(owner) {
-      if (angular.equals(_owner, owner) && _todo.length) {
+    function loadTodo(owner, force) {
+      if (angular.equals(_owner, owner) && _todo.length && !force) {
         var defer = $q.defer();
 
         defer.resolve(_todo);
