@@ -4,11 +4,12 @@
   angular
     .module('todoApp.ui')
     .component('todoList', {
-      templateUrl: './todo/list/todo-list.template.html',
+      templateUrl: './components/todo/todo-list/todo-list.template.html',
       controller: TodoListController,
       controllerAs: 'vm',
       bindings: {
         list: '<',
+        owner: '<',
         lsExist: '<',
         onRefresh: '&',
         onLoadLocalStorage: '&',
@@ -38,7 +39,6 @@
 
       vm.filterStrictFlag = false;
       vm.filter = null;
-
     }
 
     function refresh() {

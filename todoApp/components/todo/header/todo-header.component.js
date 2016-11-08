@@ -4,7 +4,7 @@
   angular
     .module('todoApp.ui')
     .component('todoHeader', {
-      templateUrl: './todo/header/todo-header.template.html',
+      templateUrl: './components/todo/header/todo-header.template.html',
       controller: TodoFooterController,
       controllerAs: 'vm',
       require: {

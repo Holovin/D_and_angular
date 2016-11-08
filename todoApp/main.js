@@ -42,10 +42,38 @@
         {
           name: 'app.todo',
           url: 'todo',
-          views: {
-            'content@app': {
-              template: '<todo-list></todo-list>'
-            }
+          controller: 'TodoCtrl',
+          controllerAs: 'vm',
+          template: '<todo-list owner="vm.owner" list="vm.todo" ls-exist="vm.lsExist" on-refresh="vm.refresh()"' +
+                    'on-load-local-storage="vm.loadLS()" on-clear-local-storage="vm.clearLS()"' +
+                    'on-save-local-storage="vm.saveLS()" on-remove-item="vm.removeItem(taskItem)"' +
+                    'on-add-item="vm.addItem(taskItem)"></todo-list>',
+          resolve: {
+            owner: ['usersStorageService', function (usersStorageService) {
+              return usersStorageService.getCurrentUser();
+            }],
+
+            checkUser: ['$timeout', '$state', '$q', 'owner', function ($timeout, $state, $q, owner) {
+              var defer = $q.defer();
+
+              if (owner) {
+                defer.resolve(owner);
+              } else {
+
+                $timeout(function () {
+                  console.log("Access denied", owner);
+                  $state.go('app.users');
+                });
+
+                defer.reject();
+              }
+
+              return defer.promise;
+            }],
+
+            todo: ['todoStorageService', 'checkUser', function (todoStorageService, checkUser) {
+               return todoStorageService.loadTodo(checkUser);
+            }]
           }
         },
         {

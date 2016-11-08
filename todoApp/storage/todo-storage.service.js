@@ -5,46 +5,49 @@
     .module('storage')
     .factory('todoStorageService', TodoStorageService);
 
-  TodoStorageService.$inject = ['localStorageService', 'networkService'];
+  TodoStorageService.$inject = ['networkService', 'localStorageService', '$q'];
 
-  function TodoStorageService(localStorageService, networkService) {
+  function TodoStorageService(networkService, localStorageService, $q) {
+    var _owner = [];
     var _todo = [];
-    var _user = [];
-    var _meetings = [];
     var _lsExist = false;
 
     return {
-      getUser: getUser,
-      getMeetings: getMeetings,
-      getData: getData,
-      setData: setData,
+      getTodo: getTodo,
+      setTodo: setTodo,
+
+      setOwner: setOwner,
+      getOwner: getOwner,
 
       addItem: addItem,
       addEmptyItem: addEmptyItem,
       removeItem: removeItem,
 
-      loadHttp: loadHttp,
-
       loadLS: loadLS,
       checkLS: checkLS,
       clearLS: clearLS,
-      saveLS: saveLS
+      saveLS: saveLS,
+      loadTodo: loadTodo
     };
 
-    function getUser() {
-      return _user;
-    }
-
-    function getMeetings() {
-      return  _meetings;
-    }
-
-    function getData() {
+    function getTodo() {
       return _todo;
     }
 
-    function setData(data) {
-      this.todo = data;
+    function setTodo(data) {
+      _todo = data;
+    }
+
+    function setOwner(user) {
+      if (!angular.equals(_owner, user)) {
+        _owner = user;
+        _todo = [];
+        _lsExist = false;
+      }
+    }
+
+    function getOwner() {
+      return _owner;
     }
     
     function addItem(item) {
@@ -68,18 +71,21 @@
       }
     }
 
-    function loadHttp() {
-      return _getUsers('./data/users.json')
-        .then(function (res) {
-          return _getUserList(res);
-        })
+    function loadTodo(owner) {
+      if (angular.equals(_owner, owner) && _todo.length) {
+        var defer = $q.defer();
 
-        .then(function (res) {
-          return _getUserMeet(res);
-        })
+        defer.resolve(_todo);
 
+        return defer.promise;
+      }
+
+      _owner = owner;
+
+      return  _getUserList(owner.todo)
         .then(function (res) {
-          _lsExist = _checkLS();
+          _todo = res.todoList;
+          return _todo;
         })
 
         .catch(function (err) {
@@ -87,8 +93,18 @@
         })
     }
 
+    function _getUserList(url) {
+      return networkService.getData(url).then(function (res) {
+        if (!res.todoList) {
+          throw new Error('Wrong user todo file!');
+        }
+
+        return res;
+      });
+    }
+
     function loadLS() {
-      var newTodo = localStorageService.getData(_user.name);
+      var newTodo = localStorageService.getData(_owner.name);
 
       if (angular.equals({}, newTodo)) {
         _todo = [];
@@ -98,7 +114,7 @@
     }
 
     function saveLS() {
-      localStorageService.setData(_user.name, _todo);
+      localStorageService.setData(_owner.name, _todo);
 
       _lsExist = true;
     }
@@ -108,46 +124,12 @@
     }
 
     function clearLS() {
-      localStorageService.removeItem(_user.name);
+      localStorageService.removeItem(_owner.name);
     }
 
     function _checkLS() {
-      var newTodo = localStorageService.getData(_user.name);
+      var newTodo = localStorageService.getData(_owner.name);
       return !angular.equals({}, newTodo);
-    }
-
-    function _getUsers(url) {
-      return networkService.getData(url).then(function (res) {
-        if (!res.users) {
-          throw new Error('Wrong users file!');
-        }
-
-        _user = res.users[_.random(res.users.length - 1)];
-        return _user.url;
-      });
-    }
-
-    function _getUserList(url) {
-      return networkService.getData(url).then(function (res) {
-        if (!res.todoList) {
-          throw new Error('Wrong user todo file!');
-        }
-
-        _todo = res.todoList;
-        return res.meetingsUrl;
-      });
-    }
-
-    function _getUserMeet(url) {
-      return networkService.getData(url).then(function (res) {
-        if (!res.meetings) {
-          throw new Error('Wrong user meetings file!');
-        }
-
-        _meetings = res.meetings;
-
-        return res;
-      });
     }
   }
 
