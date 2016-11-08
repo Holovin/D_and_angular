@@ -8,35 +8,60 @@
   ]).config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
       $urlRouterProvider.when('', '/users');
+      $urlRouterProvider.otherwise('/users');
 
       var states = [
         {
           abstract: 'true',
           name: 'app',
           url: '/',
-          template: '<ui-view/>'
+          views: {
+            'nav': {
+              // controller: 'MainCtrl',
+              // controllerAs: 'vm',
+              template: '<nav-bar></nav-bar><div ui-view></div>'
+            }
+          }
+
         },
         {
           name: 'app.users',
           url: 'users',
-          template: '<h3>hello world!</h3>'
+          controller: 'UsersCtrl',
+          controllerAs: 'vm',
+          template: '<users users="vm.users" current-user="vm.currentUser" on-select="vm.select(user)"></users><br>Current user: {{vm.currentUser}}',
+          resolve: {
+            users: ['userStorageService', function (userStorageService) {
+              return userStorageService.loadUsers();
+            }],
+            currentUser: ['userStorageService', function (userStorageService) {
+              return userStorageService.getCurrentUser();
+            }]
+          }
         },
         {
           name: 'app.todo',
           url: 'todo',
-          template: '<h2>hello world!</h2>'
+          views: {
+            'content@app': {
+              template: '<todo-list></todo-list>'
+            }
+          }
         },
         {
           name: 'app.meets',
           url: 'meets',
-          template: '<h1>hello world!</h1>'
+          views: {
+            'content@app': {
+              template: '<todo-meetings></todo-meetings>'
+            }
+          }
         }
       ];
 
 
       states.forEach(function(state) {
         $stateProvider.state(state);
-      })
+      });
     }]);
-  
 })();

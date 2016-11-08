@@ -4,7 +4,7 @@
   angular
     .module('todoApp.ui')
     .component('navBar', {
-      templateUrl: './todo/nav-bar/nav-bar.template.html',
+      templateUrl: './components/nav-bar/nav-bar.template.html',
       controllerAs: 'vm',
       controller: NavBarController
     });

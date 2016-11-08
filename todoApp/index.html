@@ -13,10 +13,8 @@
     </head>
 
     <body>
-        <div class="container" ng-controller="MainCtrl as vm" ng-cloak ng-switch on="vm.user.length">
-            <nav-bar></nav-bar>
-
-            <ui-view></ui-view>
+        <div class="container" ng-cloak>
+            <div ui-view="nav"></div>
 
             <hr>
 

@@ -8,9 +8,12 @@
   MainCtrl.$inject = ['todoStorageService'];
 
   function MainCtrl(todoStorageService) {
+    console.log('Called mainctrl: ');
+
     var vm = this;
 
     vm.$onInit = init;
+    vm.$onChanges = changes;
     vm.refresh = refresh;
     vm.loadLS = loadLS;
     vm.saveLS = saveLS;
@@ -23,8 +26,13 @@
       vm.user = [];
       vm.meetings = [];
       vm.lsExist = false;
+      vm.test = 'test';
 
       refresh();
+    }
+
+    function changes() {
+      console.log(vm);
     }
 
     function refresh() {
