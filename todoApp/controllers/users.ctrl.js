@@ -17,10 +17,6 @@
     function init() {
       vm.users = users;
       vm.currentUser = currentUser;
-
-      if (!vm.currentUser) {
-        vm.currentUser = vm.users[0];
-      }
     }
 
     function select(user) {

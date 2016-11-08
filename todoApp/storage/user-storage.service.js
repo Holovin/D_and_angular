@@ -9,7 +9,7 @@
 
   function UserStorageService(networkService) {
     var _users = [];
-    var _user;
+    var _currentUser;
 
     return {
       getUsers: getUsers,
@@ -25,15 +25,15 @@
     }
 
     function getCurrentUser() {
-      if (_user) {
-        return _user;
+      if (_currentUser) {
+        return _currentUser;
       }
 
       return false;
     }
 
     function setCurrentUser(user) {
-      _user = user;
+      _currentUser = user;
     }
 
     function loadUsers() {
@@ -44,6 +44,7 @@
       return _getUsers('./data/users.json')
         .then(function (res) {
           _users = res.users;
+          _currentUser = res.users[0];
           return res.users;
         })
 
@@ -54,7 +55,7 @@
 
     function _getUsers(url) {
       return networkService.getData(url).then(function (res) {
-        if (!res.users) {
+        if (!res.users || !res.users.length) {
           throw new Error('Wrong users file!');
         }
 

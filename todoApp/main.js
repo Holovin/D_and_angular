@@ -34,7 +34,7 @@
             users: ['userStorageService', function (userStorageService) {
               return userStorageService.loadUsers();
             }],
-            currentUser: ['userStorageService', function (userStorageService) {
+            currentUser: ['users', 'userStorageService', function (users, userStorageService) {
               return userStorageService.getCurrentUser();
             }]
           }
