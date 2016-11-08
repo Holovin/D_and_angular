@@ -17,19 +17,19 @@
           url: '/',
           views: {
             'nav': {
-              // controller: 'MainCtrl',
-              // controllerAs: 'vm',
-              template: '<nav-bar></nav-bar><div ui-view></div>'
+              template: '<nav-bar></nav-bar>'
+            },
+            'content': {
+              template: '<div ui-view></div>'
             }
           }
-
         },
         {
           name: 'app.users',
           url: 'users',
           controller: 'UsersCtrl',
           controllerAs: 'vm',
-          template: '<users users="vm.users" current-user="vm.currentUser" on-select="vm.select(user)"></users><br>Current user: {{vm.currentUser}}',
+          template: '<users users="vm.users" current-user="vm.currentUser" on-select="vm.select(user)"></users>',
           resolve: {
             users: ['userStorageService', function (userStorageService) {
               return userStorageService.loadUsers();
@@ -58,7 +58,6 @@
           }
         }
       ];
-
 
       states.forEach(function(state) {
         $stateProvider.state(state);

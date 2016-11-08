@@ -22,7 +22,7 @@
     vm.isActive = isActive;
 
     function init() {
-      
+
     }
 
     function select(user) {
